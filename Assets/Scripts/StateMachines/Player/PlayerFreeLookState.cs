@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class PlayerFreeLookState : PlayerBaseState
 {
+    #region Animation Variables
     private readonly int FreeLookBlendTreeHash = Animator.StringToHash("Freelook Blend Tree");
+    private readonly int FreeLookSpeedHash = Animator.StringToHash("Freelook Speed");
+    private const float AnimatorDampTime = 0.1f;
+    #endregion
+
     public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
@@ -20,8 +25,19 @@ public class PlayerFreeLookState : PlayerBaseState
         Vector3 movement = CalculateMovement();
 
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+
+        #region  Animations
+        if (_stateMachine.InputReader.MovementValue == Vector2.zero)
+        {
+            _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
+            return;
+        }
+        _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 1, AnimatorDampTime, deltaTime);
+        #endregion
+
         FaceMovementDirection(movement, deltaTime);
     }
+
     private void FaceMovementDirection(Vector3 movement, float deltaTime)
     {
         _stateMachine.transform.rotation = Quaternion.Lerp(
