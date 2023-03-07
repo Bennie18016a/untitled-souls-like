@@ -26,7 +26,7 @@ public class PlayerFreeLookState : PlayerBaseState
 
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
 
-        #region  Animations
+        #region Animations
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             _stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);

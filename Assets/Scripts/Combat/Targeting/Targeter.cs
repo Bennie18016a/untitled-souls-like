@@ -12,8 +12,10 @@ public class Targeter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Target>(out Target target))
+        if (other.transform.parent.TryGetComponent<Target>(out Target target))
         {
+            if (targets.Contains(target)) return;
+
             targets.Add(target);
             target.onDestroyed += RemoveTarget;
         }
@@ -21,7 +23,7 @@ public class Targeter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<Target>(out Target target))
+        if (other.transform.parent.TryGetComponent<Target>(out Target target))
         {
             targets.Remove(target);
             RemoveTarget(target);
@@ -59,7 +61,7 @@ public class Targeter : MonoBehaviour
 
         //Sets current target to closest and adds it to the group.
         currentTarget = closestTarget;
-        targetGroup.AddMember(currentTarget.transform, 1f, 2f);
+        targetGroup.AddMember(currentTarget.transform, 1f, 3f);
         return true;
     }
 
