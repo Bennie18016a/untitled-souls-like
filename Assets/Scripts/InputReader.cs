@@ -10,6 +10,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     private Controls _controls;
     private bool Targeting;
 
+    public bool IsAttacking;
 
     #region Events
     public event Action CancelEvent;
@@ -57,5 +58,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             Targeting = !Targeting;
         }
 
+    }
+
+    public void OnAttack(InputAction.CallbackContext context){
+        IsAttacking = context.performed;
     }
 }

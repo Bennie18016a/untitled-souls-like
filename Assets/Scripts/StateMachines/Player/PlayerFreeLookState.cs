@@ -24,6 +24,12 @@ public class PlayerFreeLookState : PlayerBaseState
         if (!_stateMachine.CanMove) { return; }
         Vector3 movement = CalculateMovement();
 
+          if (_stateMachine.InputReader.IsAttacking)
+        {
+            _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
+            return;
+        }
+
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
 
         #region Animations
