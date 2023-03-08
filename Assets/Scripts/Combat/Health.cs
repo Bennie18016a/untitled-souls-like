@@ -17,6 +17,11 @@ public class Health : MonoBehaviour
         _health = MaximumHealth;
     }
 
+    private void Update()
+    {
+        if (_isDead) { Destroy(gameObject); }
+    }
+
     public void Invunerable(bool set)
     {
         isInvunerable = set;

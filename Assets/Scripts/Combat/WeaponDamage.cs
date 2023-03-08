@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponDamage : MonoBehaviour
 {
     [SerializeField] private Collider playerCollider;
+    [SerializeField] private Health PlayerHealth;
     private int _damage;
     public List<GameObject> AlreadyCollided = new List<GameObject>();
 
@@ -21,13 +22,12 @@ public class WeaponDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other == playerCollider) { return; }
-        if(other.transform.parent == playerCollider.gameObject) return;
-        if (AlreadyCollided.Contains(other.transform.gameObject)) { return; }
-        Debug.Log(other.transform.name);
-        AlreadyCollided.Add(other.transform.gameObject);
+        if (AlreadyCollided.Contains(other.transform.parent.gameObject)) { return; }
+        AlreadyCollided.Add(other.transform.parent.gameObject);
 
         if (other.transform.parent.TryGetComponent<Health>(out Health health))
         {
+            if (health == PlayerHealth) return;
             health.DealDamage(_damage);
         }
     }
