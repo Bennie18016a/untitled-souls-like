@@ -16,6 +16,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public bool CanMove { get; set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
     [field: SerializeField] public float TargetingMovementSpeed { get; private set; }
+    [field: SerializeField] public float BlockMovementSpeed { get; private set; }
     public Transform MainCameraTransform { get; private set; }
 
     private void Start()

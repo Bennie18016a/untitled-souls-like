@@ -22,15 +22,23 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         if (!_stateMachine.CanMove) { return; }
-        Vector3 movement = CalculateMovement();
-
-          if (_stateMachine.InputReader.IsAttacking)
+        #region SwitchStates
+        if (_stateMachine.InputReader.IsAttacking)
         {
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }
+        if (_stateMachine.InputReader.IsBlocking)
+        {
+            _stateMachine.SwitchState(new PlayerBlockState(_stateMachine));
+            return;
+        }
+        #endregion
 
+        #region Movement
+        Vector3 movement = CalculateMovement();
         Move(movement * _stateMachine.FreeLookMovementSpeed, deltaTime);
+        #endregion
 
         #region Animations
         if (_stateMachine.InputReader.MovementValue == Vector2.zero)

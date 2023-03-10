@@ -6,11 +6,16 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    #region Public Values
     public Vector2 MovementValue { get; private set; }
+    public bool IsAttacking { get; private set; }
+    public bool IsBlocking { get; private set; }
+    #endregion
+
+    #region Private Values
     private Controls _controls;
     private bool Targeting;
-
-    public bool IsAttacking;
+    #endregion
 
     #region Events
     public event Action CancelEvent;
@@ -60,7 +65,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     }
 
-    public void OnAttack(InputAction.CallbackContext context){
+    public void OnAttack(InputAction.CallbackContext context)
+    {
         IsAttacking = context.performed;
+    }
+
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        // if (context.performed) { IsBlocking = true; }
+        // else if (context.canceled) { IsBlocking = false; }
+        IsBlocking = context.performed;
     }
 }
