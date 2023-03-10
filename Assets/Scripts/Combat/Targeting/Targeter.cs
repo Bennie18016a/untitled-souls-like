@@ -62,12 +62,14 @@ public class Targeter : MonoBehaviour
         //Sets current target to closest and adds it to the group.
         currentTarget = closestTarget;
         targetGroup.AddMember(currentTarget.transform, 1f, 3f);
+        currentTarget.gameObject.GetComponent<Health>().ToggleSlider(true);
         return true;
     }
 
     public void Cancel()
     {
         // if it isnt null, remove target from target group and set current target to null.
+        currentTarget.gameObject.GetComponent<Health>().ToggleSlider(false);
         if (currentTarget != null) targetGroup.RemoveMember(currentTarget.transform);
         currentTarget = null;
     }
@@ -79,6 +81,7 @@ public class Targeter : MonoBehaviour
         if (currentTarget == target)
         {
             targetGroup.RemoveMember(target.transform);
+            currentTarget.gameObject.GetComponent<Health>().ToggleSlider(false);
             currentTarget = null;
         }
 

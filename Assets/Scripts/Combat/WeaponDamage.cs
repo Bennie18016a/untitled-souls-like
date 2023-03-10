@@ -7,6 +7,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] private Collider playerCollider;
     [SerializeField] private Health PlayerHealth;
     private int _damage;
+    private float _knockback;
     public List<GameObject> AlreadyCollided = new List<GameObject>();
 
     private void OnEnable()
@@ -14,9 +15,10 @@ public class WeaponDamage : MonoBehaviour
         AlreadyCollided.Clear();
     }
 
-    public void SetDamage(int newDamage)
+    public void SetDamage(int newDamage, float Knockback)
     {
         this._damage = newDamage;
+        this._knockback = Knockback;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +31,11 @@ public class WeaponDamage : MonoBehaviour
         {
             if (health == PlayerHealth) return;
             health.DealDamage(_damage);
+        }
+
+        if (other.transform.parent.TryGetComponent<ForceReciver>(out ForceReciver forceReciver) && _knockback > 0)
+        {
+            forceReciver.AddForce((other.transform.position - playerCollider.transform.position).normalized * _knockback);
         }
     }
 }

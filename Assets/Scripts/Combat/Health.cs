@@ -2,24 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    #region Public Fields
+    public GameObject HealthSlider;
+    #endregion
+
+    #region Private Fields
     [SerializeField] private int MaximumHealth = 100;
     private int _health;
     private bool _isDead => _health == 0;
     private bool isInvunerable;
+    #endregion
+
+    #region Events
     public event Action OnTakeDamage;
     public event Action OnDie;
+    #endregion
 
     private void Start()
     {
         _health = MaximumHealth;
+        HealthSlider.GetComponent<Slider>().maxValue = MaximumHealth;
+        HealthSlider.SetActive(false);
     }
 
     private void Update()
     {
         if (_isDead) { Destroy(gameObject); }
+        if(gameObject.name == "Player") return;
+        if(HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
     }
 
     public void Invunerable(bool set)
@@ -35,5 +49,13 @@ public class Health : MonoBehaviour
         OnTakeDamage?.Invoke();
 
         if (_isDead) { OnDie?.Invoke(); }
+    }
+
+    public void ToggleSlider(bool toggle){
+        HealthSlider.SetActive(toggle);
+    }
+
+    private void UpdateSlider(){
+        HealthSlider.GetComponent<Slider>().value = _health;
     }
 }
