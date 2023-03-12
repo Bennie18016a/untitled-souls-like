@@ -20,7 +20,7 @@ public class EnemyAttackingState : EnemyBaseState
     {
         if (GetNormalizedTime(_stateMachine.Animator) >= 1f)
         {
-            _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
+            _stateMachine.SwitchState(new EnemyStrafeState(_stateMachine));
         }
     }
 

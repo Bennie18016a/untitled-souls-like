@@ -26,10 +26,10 @@ public class EnemyChasingState : EnemyBaseState
         {
             _stateMachine.SwitchState(new EnemyStrafeState(_stateMachine));
         }
-        _stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);
-
         MoveToPlayer(deltaTime);
         FacePlayer();
+
+        _stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);
     }
 
     public override void Exit()

@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class EnemyStrafeState : EnemyBaseState
 {
+    private readonly int LocomotionBlendTreeHash = Animator.StringToHash("Locomotion");
+    private readonly int SpeedHash = Animator.StringToHash("Speed");
+    private const float AnimatorDampTime = 0.1f;
+
     private Vector3 newPos;
     public EnemyStrafeState(EnemyStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
+        _stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, 0.1f);
+
         newPos = _stateMachine.transform.position + Random.insideUnitSphere * _stateMachine.StrafeRange;
         if (newPos.y != 0) newPos.y = 0;
         while (Vector3.Distance(newPos, _stateMachine.Player.transform.position) <= 1f && Vector3.Distance(newPos, _stateMachine.Player.transform.position) >= 4f)
@@ -22,6 +28,11 @@ public class EnemyStrafeState : EnemyBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (!IsInStafeRange())
+        {
+            _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
+        }
+
         MoveToDest(newPos, deltaTime);
         FacePlayer();
 
@@ -45,7 +56,7 @@ public class EnemyStrafeState : EnemyBaseState
     {
         if (newPos == null) return false;
 
-        return Vector3.Distance(_stateMachine.transform.position, newPos) < 1;
+        return Vector3.Distance(_stateMachine.transform.position, newPos) < 1.1f;
     }
 
     private void RandomBeheaviour()
