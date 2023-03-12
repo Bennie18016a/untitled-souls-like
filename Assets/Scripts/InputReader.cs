@@ -20,6 +20,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     #region Events
     public event Action CancelEvent;
     public event Action TargetEvent;
+    public event Action DodgeEvent;
     #endregion
 
     private void Start()
@@ -75,5 +76,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         // if (context.performed) { IsBlocking = true; }
         // else if (context.canceled) { IsBlocking = false; }
         IsBlocking = context.performed;
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        DodgeEvent?.Invoke();
+
     }
 }

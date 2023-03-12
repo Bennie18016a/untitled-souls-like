@@ -11,6 +11,7 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.CancelEvent += OnCancel;
+        _stateMachine.InputReader.DodgeEvent += OnDodge;
 
         _stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, 0.1f);
     }
@@ -40,12 +41,6 @@ public class PlayerTargetingState : PlayerBaseState
         FaceTarget();
 
         UpdateAnimatior(deltaTime);
-    }
-
-    private void OnCancel()
-    {
-        _stateMachine.Targeter.Cancel();
-        _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine));
     }
 
     private Vector3 CalculateMovement()
@@ -82,5 +77,24 @@ public class PlayerTargetingState : PlayerBaseState
         }
     }
 
-    public override void Exit() { _stateMachine.InputReader.CancelEvent -= OnCancel; }
+    #region Events
+    private void OnCancel()
+    {
+        _stateMachine.Targeter.Cancel();
+        _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine));
+    }
+
+    private void OnDodge()
+    {
+        if (_stateMachine.InputReader.MovementValue == Vector2.zero) return;
+
+        _stateMachine.SwitchState(new PlayerDodgeState(_stateMachine, _stateMachine.InputReader.MovementValue));
+    }
+    #endregion
+
+    public override void Exit()
+    {
+        _stateMachine.InputReader.CancelEvent -= OnCancel;
+        _stateMachine.InputReader.DodgeEvent -= OnDodge;
+    }
 }

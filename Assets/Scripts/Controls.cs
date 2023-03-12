@@ -71,6 +71,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""605feaf8-4e91-48a8-a426-25224f344f83"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""858b9e45-5d5b-46f3-b1a3-0c0021cf02f8"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -202,6 +222,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Target = m_Player.FindAction("Target", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
+        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,6 +287,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Target;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Block;
+    private readonly InputAction m_Player_Dodge;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -275,6 +297,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Target => m_Wrapper.m_Player_Target;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Block => m_Wrapper.m_Player_Block;
+        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -299,6 +322,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Block.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
                 @Block.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBlock;
+                @Dodge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDodge;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -318,6 +344,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Block.started += instance.OnBlock;
                 @Block.performed += instance.OnBlock;
                 @Block.canceled += instance.OnBlock;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
             }
         }
     }
@@ -338,5 +367,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnTarget(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }
