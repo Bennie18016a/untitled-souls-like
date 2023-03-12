@@ -15,6 +15,7 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float PlayerDetectionRange { get; private set; }
     [field: SerializeField] public float AttackRange { get; private set; }
+    [field: SerializeField] public float StrafeRange { get; private set; }
     [field: SerializeField] public int AttackDamage { get; private set; }
     [field: SerializeField] public float Knockback { get; private set; }
     public GameObject Player { get; private set; }
@@ -57,5 +58,8 @@ public class EnemyStateMachine : StateMachine
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, AttackRange);
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, StrafeRange);
     }
 }

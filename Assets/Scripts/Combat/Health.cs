@@ -26,14 +26,15 @@ public class Health : MonoBehaviour
     {
         _health = MaximumHealth;
         HealthSlider.GetComponent<Slider>().maxValue = MaximumHealth;
+
+        if (gameObject.name == "Player") return;
         HealthSlider.SetActive(false);
     }
 
     private void Update()
     {
         if (_isDead) { Destroy(gameObject); }
-        if(gameObject.name == "Player") return;
-        if(HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
+        if (HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
     }
 
     public void Invunerable(bool set)
@@ -51,11 +52,13 @@ public class Health : MonoBehaviour
         if (_isDead) { OnDie?.Invoke(); }
     }
 
-    public void ToggleSlider(bool toggle){
+    public void ToggleSlider(bool toggle)
+    {
         HealthSlider.SetActive(toggle);
     }
 
-    private void UpdateSlider(){
+    private void UpdateSlider()
+    {
         HealthSlider.GetComponent<Slider>().value = _health;
     }
 }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackState : EnemyBaseState
+public class EnemyAttackingState : EnemyBaseState
 {
     private readonly int AttackHash = Animator.StringToHash("Attack");
     private const float TarnsitionDuration = 0.1f;
 
-    public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine) { }
+    public EnemyAttackingState(EnemyStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {

@@ -22,10 +22,9 @@ public class EnemyChasingState : EnemyBaseState
             _stateMachine.SwitchState(new EnemyIdleState(_stateMachine));
             return;
         }
-        else if (IsInAttackRange())
+        else if (IsInStafeRange())
         {
-            _stateMachine.SwitchState(new EnemyAttackState(_stateMachine));
-            return;
+            _stateMachine.SwitchState(new EnemyStrafeState(_stateMachine));
         }
         _stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);
 
@@ -33,16 +32,6 @@ public class EnemyChasingState : EnemyBaseState
         FacePlayer();
     }
 
-    private void MoveToPlayer(float deltaTime)
-    {
-
-        _stateMachine.NavMeshAgent.nextPosition = _stateMachine.transform.position;
-        if (!_stateMachine.NavMeshAgent.isOnNavMesh) { return; }
-
-        _stateMachine.NavMeshAgent.destination = _stateMachine.Player.transform.position;
-
-        Move(_stateMachine.NavMeshAgent.desiredVelocity.normalized * _stateMachine.MovementSpeed, deltaTime);
-    }
     public override void Exit()
     {
         _stateMachine.NavMeshAgent.ResetPath();

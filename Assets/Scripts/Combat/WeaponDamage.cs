@@ -8,7 +8,7 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] private Health PlayerHealth;
     private int _damage;
     private float _knockback;
-    public List<GameObject> AlreadyCollided = new List<GameObject>();
+    public List<Collider> AlreadyCollided = new List<Collider>();
 
     private void OnEnable()
     {
@@ -24,16 +24,16 @@ public class WeaponDamage : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other == playerCollider) { return; }
-        if (AlreadyCollided.Contains(other.transform.parent.gameObject)) { return; }
-        AlreadyCollided.Add(other.transform.parent.gameObject);
+        if (AlreadyCollided.Contains(other)) { return; }
+        AlreadyCollided.Add(other);
 
-        if (other.transform.parent.TryGetComponent<Health>(out Health health))
+        if (other.TryGetComponent<Health>(out Health health))
         {
             if (health == PlayerHealth) return;
             health.DealDamage(_damage);
         }
 
-        if (other.transform.parent.TryGetComponent<ForceReciver>(out ForceReciver forceReciver) && _knockback > 0)
+        if (other.TryGetComponent<ForceReciver>(out ForceReciver forceReciver) && _knockback > 0)
         {
             forceReciver.AddForce((other.transform.position - playerCollider.transform.position).normalized * _knockback);
         }

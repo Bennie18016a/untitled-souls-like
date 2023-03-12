@@ -12,7 +12,7 @@ public class Targeter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent.TryGetComponent<Target>(out Target target))
+        if (other.TryGetComponent<Target>(out Target target))
         {
             if (targets.Contains(target)) return;
 

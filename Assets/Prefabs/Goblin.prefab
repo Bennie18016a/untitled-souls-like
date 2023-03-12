@@ -339,7 +339,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1423071878356375159}
   - component: {fileID: 7516873627242116985}
-  - component: {fileID: 5284509313556106251}
   m_Layer: 0
   m_Name: Icosphere.002
   m_TagString: Untagged
@@ -422,20 +421,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.27682364, y: -0.4968149, z: 0.047477543}
     m_Extent: {x: 0.30950093, y: 0.54282016, z: 0.46346432}
   m_DirtyAABB: 0
---- !u!64 &5284509313556106251
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752720150925657479}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4444728127320036556, guid: fabfd6917c4da3b45919c1689f0077d0, type: 3}
 --- !u!1 &2463049058057319694
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +786,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3202764174548161746}
   - component: {fileID: 271410019991091189}
-  - component: {fileID: 3931300983692243719}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -882,20 +866,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.019946218, y: 0.577844, z: 0.19601583}
     m_Extent: {x: 0.70886093, y: 0.47724378, z: 0.52685595}
   m_DirtyAABB: 0
---- !u!64 &3931300983692243719
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4421308267017143702}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8839368762345780380, guid: fabfd6917c4da3b45919c1689f0077d0, type: 3}
 --- !u!1 &4656630784672491607
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,7 +876,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6982859533064234448}
   - component: {fileID: 537566063491869595}
-  - component: {fileID: 8443597409425781558}
   m_Layer: 0
   m_Name: Icosphere.001
   m_TagString: Untagged
@@ -990,20 +959,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.03455101, y: -0.5221261, z: 0.00891602}
     m_Extent: {x: 0.2591924, y: 0.529683, z: 0.46671942}
   m_DirtyAABB: 0
---- !u!64 &8443597409425781558
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4656630784672491607}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1579241630799410176, guid: fabfd6917c4da3b45919c1689f0077d0, type: 3}
 --- !u!1 &4692563697834934083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1203,8 @@ MonoBehaviour:
   <Target>k__BackingField: {fileID: 4701688480864947891}
   <MovementSpeed>k__BackingField: 3
   <PlayerDetectionRange>k__BackingField: 7
-  <AttackRange>k__BackingField: 1
+  <AttackRange>k__BackingField: 1.3
+  <StrafeRange>k__BackingField: 4
   <AttackDamage>k__BackingField: 20
   <Knockback>k__BackingField: 3
 --- !u!1 &5637029400578699184
@@ -1704,7 +1660,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1416632843556549451}
   - component: {fileID: 9161379955157129973}
-  - component: {fileID: 3497054264718295017}
   m_Layer: 0
   m_Name: Icosphere
   m_TagString: Untagged
@@ -1796,20 +1751,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0043598413, y: 0.29834503, z: 0.0050150603}
     m_Extent: {x: 0.6312138, y: 0.56747556, z: 0.32493412}
   m_DirtyAABB: 0
---- !u!64 &3497054264718295017
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8774566940614276312}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 289301614986012343, guid: fabfd6917c4da3b45919c1689f0077d0, type: 3}
 --- !u!1 &9177915987477624950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,27 +1795,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.121
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.559
+      value: -0.771
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bd373a62f40a1814c8395f9d11828ffb, type: 3}
       propertyPath: m_LocalRotation.w
