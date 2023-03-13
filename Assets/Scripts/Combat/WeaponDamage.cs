@@ -35,6 +35,7 @@ public class WeaponDamage : MonoBehaviour
 
         if (other.TryGetComponent<ForceReciver>(out ForceReciver forceReciver) && _knockback > 0)
         {
+            Debug.Log("Knockback");
             forceReciver.AddForce((other.transform.position - playerCollider.transform.position).normalized * _knockback);
         }
     }

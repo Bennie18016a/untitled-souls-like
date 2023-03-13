@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyStrafeState : EnemyBaseState
 {
@@ -9,6 +10,7 @@ public class EnemyStrafeState : EnemyBaseState
     private const float AnimatorDampTime = 0.1f;
 
     private Vector3 newPos;
+    private Vector3 pos;
     public EnemyStrafeState(EnemyStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
@@ -22,8 +24,6 @@ public class EnemyStrafeState : EnemyBaseState
             newPos = _stateMachine.transform.position + Random.insideUnitSphere * _stateMachine.StrafeRange;
             if (newPos.y != 0) newPos.y = 0;
         }
-
-        Debug.Log(newPos);
     }
 
     public override void Tick(float deltaTime)
@@ -40,6 +40,8 @@ public class EnemyStrafeState : EnemyBaseState
         {
             RandomBeheaviour();
         }
+
+        pos = _stateMachine.transform.position;
     }
 
     private void MoveToDest(Vector3 pos, float deltaTime)
@@ -61,10 +63,9 @@ public class EnemyStrafeState : EnemyBaseState
 
     private void RandomBeheaviour()
     {
-        int random = Random.Range(0, 2) + 1;
-        Debug.Log(random);
+        int random = Random.Range(0, 3) + 1;
 
-        if (random == 1)
+        if (random < 3)
         {
             _stateMachine.SwitchState(new EnemyStrafeState(_stateMachine));
         }

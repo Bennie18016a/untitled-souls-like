@@ -33,14 +33,7 @@ public class PlayerAttackingState : PlayerBaseState
         }
         else
         {
-            if (_stateMachine.Targeter.currentTarget != null)
-            {
-                _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
-            }
-            else
-            {
-                _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine));
-            }
+            ReturnToLocomotion();
         }
         _previousFrameTime = normalizedTime;
 
@@ -56,13 +49,10 @@ public class PlayerAttackingState : PlayerBaseState
 
     private void TryApplyForce()
     {
-        if (_appliedForce) return;
+        if (_appliedForce) { return; }
         _stateMachine.ForceReciver.AddForce(_stateMachine.transform.forward * _attack.Force);
         _appliedForce = true;
     }
-
-
-
     public override void Exit()
     {
 

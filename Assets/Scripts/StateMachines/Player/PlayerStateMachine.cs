@@ -43,7 +43,7 @@ public class PlayerStateMachine : StateMachine
 
     private void HandleTakeDamage()
     {
-        Debug.Log("Took Damage");
+        SwitchState(new PlayerImpactState(this));
     }
     private void HandleDie()
     {
