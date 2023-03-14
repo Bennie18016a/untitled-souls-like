@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     public event Action OnDie;
     #endregion
 
+    #region Unity Functions
     private void Start()
     {
         _health = MaximumHealth;
@@ -36,7 +37,9 @@ public class Health : MonoBehaviour
         if (_isDead) { Destroy(gameObject); }
         if (HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
     }
+    #endregion
 
+    #region Functions
     public void Invunerable(bool set)
     {
         isInvunerable = set;
@@ -57,8 +60,15 @@ public class Health : MonoBehaviour
         HealthSlider.SetActive(toggle);
     }
 
+    public void SetMaxHealth(float multipler)
+    {
+        float newHealth = MaximumHealth * multipler;
+        MaximumHealth = (int)newHealth;
+    }
+
     private void UpdateSlider()
     {
         HealthSlider.GetComponent<Slider>().value = _health;
     }
+    #endregion
 }

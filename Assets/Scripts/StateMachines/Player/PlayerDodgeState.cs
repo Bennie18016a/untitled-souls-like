@@ -19,6 +19,8 @@ public class PlayerDodgeState : PlayerBaseState
 
     public override void Enter()
     {
+        _stateMachine.Stamina.TakeStamina(_stateMachine.DodgeStaminaCost);
+
         remainingDodgeTime = _stateMachine.DodgeDuration;
 
         _stateMachine.Animator.SetFloat(DodgeForwardHash, dodgeDirectionInput.y);

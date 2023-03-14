@@ -1111,8 +1111,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.43
-  m_Radius: 0.44
+  m_Height: 2.91
+  m_Radius: 0.71
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.04
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthSlider: {fileID: 7814680814167851484}
-  MaximumHealth: 100
+  MaximumHealth: 25
 --- !u!114 &543450653133813028
 MonoBehaviour:
   m_ObjectHideFlags: 0

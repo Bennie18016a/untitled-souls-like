@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
+    #region Scripts
     [field: SerializeField] public ForceReciver ForceReciver { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public Animator Animator { get; private set; }
@@ -12,6 +13,11 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Attack[] Attacks { get; private set; }
     [field: SerializeField] public WeaponDamage WeaponDamage { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
+    [field: SerializeField] public Stamina Stamina { get; private set; }
+    [field: SerializeField] public Stats Stats { get; private set; }
+    #endregion
+
+    #region Variables
     [field: SerializeField] public float RotationDamping { get; private set; }
     [field: SerializeField] public bool CanMove { get; set; }
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
@@ -19,14 +25,15 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float BlockMovementSpeed { get; private set; }
     [field: SerializeField] public float DodgeDuration { get; private set; }
     [field: SerializeField] public float DodgeLength { get; private set; }
-
+    [field: SerializeField] public int DodgeStaminaCost { get; private set; }
     public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
+    #endregion
     public Transform MainCameraTransform { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         MainCameraTransform = Camera.main.transform;
-        SwitchState(new PlayerFreeLookState(this));
+        SwitchState(new PlayerRespawnState(this));
     }
 
     private void OnEnable()

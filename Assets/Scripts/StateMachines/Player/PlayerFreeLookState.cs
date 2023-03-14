@@ -25,6 +25,7 @@ public class PlayerFreeLookState : PlayerBaseState
         #region SwitchStates
         if (_stateMachine.InputReader.IsAttacking)
         {
+            if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }

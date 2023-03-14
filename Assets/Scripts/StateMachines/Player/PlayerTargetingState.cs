@@ -21,11 +21,13 @@ public class PlayerTargetingState : PlayerBaseState
         #region Switch States
         if (_stateMachine.InputReader.IsAttacking)
         {
+            if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }
         if (_stateMachine.InputReader.IsBlocking)
         {
+            if (!_stateMachine.Stamina.CanAction(_stateMachine.DodgeStaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerBlockState(_stateMachine));
             return;
         }

@@ -15,7 +15,8 @@ public class PlayerAttackingState : PlayerBaseState
 
     public override void Enter()
     {
-        _stateMachine.WeaponDamage.SetDamage(_attack.AttackDamage, _attack.Knockback);
+        _stateMachine.WeaponDamage.SetDamage(_attack.AttackDamage + _stateMachine.Stats.Strength, _attack.Knockback);
+        _stateMachine.Stamina.TakeStamina(_attack.StaminaCost);
         _stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
     }
 
@@ -43,6 +44,7 @@ public class PlayerAttackingState : PlayerBaseState
     {
         if (_attack.CombatStateIndex == -1) { Debug.Log("No combo"); return; }
         if (normalizedTime < _attack.ComboAttackTime) { Debug.Log("Too early"); return; }
+        if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[_attack.CombatStateIndex].StaminaCost)) { Debug.Log("Not Enough Stamina"); return; }
 
         _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, _attack.CombatStateIndex));
     }

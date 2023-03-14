@@ -17,6 +17,7 @@ public class PlayerBlockState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.Health.Invunerable(true);
+        _stateMachine.Stamina.SetNaturalStamina(false);
 
         if (_stateMachine.Targeter.currentTarget == null) { _stateMachine.Animator.CrossFadeInFixedTime(FreeBlockBlendTree, 0.1f); }
         else { _stateMachine.Animator.CrossFadeInFixedTime(TargetBlockBlendTree, 0.1f); }
@@ -27,6 +28,7 @@ public class PlayerBlockState : PlayerBaseState
         #region Switch States
         if (_stateMachine.InputReader.IsAttacking)
         {
+            if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }
@@ -122,5 +124,6 @@ public class PlayerBlockState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.Health.Invunerable(false);
+        _stateMachine.Stamina.SetNaturalStamina(true);
     }
 }
