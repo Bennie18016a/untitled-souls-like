@@ -5,12 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyStateMachine : StateMachine
 {
+    #region Scripts
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public ForceReciver ForceReciver { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
     [field: SerializeField] public WeaponDamage WeaponDamage { get; private set; }
+    #endregion
+
+    #region Variables
     [field: SerializeField] public Target Target { get; private set; }
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float PlayerDetectionRange { get; private set; }
@@ -18,8 +22,11 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float StrafeRange { get; private set; }
     [field: SerializeField] public int AttackDamage { get; private set; }
     [field: SerializeField] public float Knockback { get; private set; }
+    [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     public GameObject Player { get; private set; }
+    #endregion
 
+    #region Unity Functions
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -29,6 +36,7 @@ public class EnemyStateMachine : StateMachine
 
         SwitchState(new EnemyIdleState(this));
     }
+
     private void OnEnable()
     {
         Health.OnTakeDamage += HandleTakeDamage;
@@ -40,7 +48,9 @@ public class EnemyStateMachine : StateMachine
         Health.OnTakeDamage -= HandleTakeDamage;
         Health.OnDie -= HandleDie;
     }
+    #endregion
 
+    #region Events
     private void HandleTakeDamage()
     {
         SwitchState(new EnemyImpactState(this));
@@ -49,6 +59,7 @@ public class EnemyStateMachine : StateMachine
     {
         GameObject.Destroy(gameObject);
     }
+    #endregion
 
     private void OnDrawGizmosSelected()
     {

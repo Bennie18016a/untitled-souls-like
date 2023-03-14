@@ -19,15 +19,13 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         #region Switch States
-        if (_stateMachine.InputReader.IsAttacking)
+        if (_stateMachine.InputReader.IsAttacking && _stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost))
         {
-            if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }
         if (_stateMachine.InputReader.IsBlocking)
         {
-            if (!_stateMachine.Stamina.CanAction(_stateMachine.DodgeStaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerBlockState(_stateMachine));
             return;
         }
@@ -89,6 +87,7 @@ public class PlayerTargetingState : PlayerBaseState
     private void OnDodge()
     {
         if (_stateMachine.InputReader.MovementValue == Vector2.zero) return;
+        if (!_stateMachine.Stamina.CanAction(_stateMachine.DodgeStaminaCost)) { return; }
 
         _stateMachine.SwitchState(new PlayerDodgeState(_stateMachine, _stateMachine.InputReader.MovementValue));
     }

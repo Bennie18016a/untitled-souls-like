@@ -8,6 +8,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     #region Public Values
     public Vector2 MovementValue { get; private set; }
+    public Vector2 MouseValue { get; private set; }
     public bool IsAttacking { get; private set; }
     public bool IsBlocking { get; private set; }
     #endregion
@@ -46,7 +47,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnLook(InputAction.CallbackContext context)
     {
-
+        MouseValue = context.ReadValue<Vector2>();
     }
 
     public void OnTarget(InputAction.CallbackContext context)

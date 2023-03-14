@@ -29,7 +29,7 @@ public class PlayerDodgeState : PlayerBaseState
 
 
         _stateMachine.Health.Invunerable(true);
-
+        _stateMachine.Stamina.SetNaturalStamina(false);
     }
 
     public override void Tick(float deltaTime)
@@ -55,5 +55,6 @@ public class PlayerDodgeState : PlayerBaseState
     public override void Exit()
     {
         _stateMachine.Health.Invunerable(false);
+        _stateMachine.Stamina.SetNaturalStamina(true);
     }
 }

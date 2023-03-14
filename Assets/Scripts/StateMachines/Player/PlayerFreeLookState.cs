@@ -22,10 +22,10 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         if (!_stateMachine.CanMove) { return; }
+
         #region SwitchStates
-        if (_stateMachine.InputReader.IsAttacking)
+        if (_stateMachine.InputReader.IsAttacking && _stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost))
         {
-            if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }

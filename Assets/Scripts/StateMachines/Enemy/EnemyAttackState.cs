@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAttackState : EnemyBaseState
 {
+    private float AttackTime;
     public EnemyAttackState(EnemyStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter() { }
@@ -14,9 +15,26 @@ public class EnemyAttackState : EnemyBaseState
         {
             _stateMachine.SwitchState(new EnemyAttackingState(_stateMachine));
         }
+        if (AttackTime >= _stateMachine.MaxAttackAttemptTime)
+        {
+            if (IsInStafeRange())
+            {
+                _stateMachine.SwitchState(new EnemyStrafeState(_stateMachine));
+            }
+            else if (IsInChaseRange())
+            {
+                _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
+            }
+            else
+            {
+                _stateMachine.SwitchState(new EnemyIdleState(_stateMachine));
+            }
+        }
 
         MoveToPlayer(deltaTime);
         FacePlayer();
+
+        AttackTime += 1 * Time.deltaTime;
     }
 
     public override void Exit()

@@ -15,6 +15,7 @@ public class PlayerAttackingState : PlayerBaseState
 
     public override void Enter()
     {
+        _stateMachine.Stamina.SetNaturalStamina(false);
         _stateMachine.WeaponDamage.SetDamage(_attack.AttackDamage + _stateMachine.Stats.Strength, _attack.Knockback);
         _stateMachine.Stamina.TakeStamina(_attack.StaminaCost);
         _stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
@@ -57,6 +58,6 @@ public class PlayerAttackingState : PlayerBaseState
     }
     public override void Exit()
     {
-
+        _stateMachine.Stamina.SetNaturalStamina(true);
     }
 }

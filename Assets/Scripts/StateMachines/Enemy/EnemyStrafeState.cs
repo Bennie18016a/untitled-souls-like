@@ -32,6 +32,10 @@ public class EnemyStrafeState : EnemyBaseState
         {
             _stateMachine.SwitchState(new EnemyChasingState(_stateMachine));
         }
+        if (IsInAttackRange())
+        {
+            RandomBeheaviour();
+        }
 
         MoveToDest(newPos, deltaTime);
         FacePlayer();
