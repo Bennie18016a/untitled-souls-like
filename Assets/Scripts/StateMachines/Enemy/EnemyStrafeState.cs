@@ -17,12 +17,12 @@ public class EnemyStrafeState : EnemyBaseState
     {
         _stateMachine.Animator.CrossFadeInFixedTime(LocomotionBlendTreeHash, 0.1f);
 
-        newPos = _stateMachine.transform.position + Random.insideUnitSphere * _stateMachine.StrafeRange;
-        if (newPos.y != 0) newPos.y = 0;
+        newPos = _stateMachine.Player.transform.position + Random.insideUnitSphere * _stateMachine.StrafeRange;
+        newPos.y = _stateMachine.transform.position.y;
         while (Vector3.Distance(newPos, _stateMachine.Player.transform.position) <= 1f && Vector3.Distance(newPos, _stateMachine.Player.transform.position) >= 4f)
         {
             newPos = _stateMachine.transform.position + Random.insideUnitSphere * _stateMachine.StrafeRange;
-            if (newPos.y != 0) newPos.y = 0;
+            newPos.y = _stateMachine.transform.position.y;
         }
     }
 
@@ -46,6 +46,7 @@ public class EnemyStrafeState : EnemyBaseState
         }
 
         pos = _stateMachine.transform.position;
+        Debug.Log(Vector3.Distance(_stateMachine.transform.position, newPos));
     }
 
     private void MoveToDest(Vector3 pos, float deltaTime)
@@ -81,6 +82,7 @@ public class EnemyStrafeState : EnemyBaseState
 
     public override void Exit()
     {
+        Debug.Log("Finished Strafe");
         _stateMachine.NavMeshAgent.ResetPath();
         _stateMachine.NavMeshAgent.velocity = Vector3.zero;
     }
