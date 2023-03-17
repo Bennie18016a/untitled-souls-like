@@ -42,11 +42,12 @@ public abstract class BossBaseState : State
         _stateMachine.transform.rotation = Quaternion.RotateTowards(_stateMachine.transform.rotation, direction, _stateMachine.LookSpeed * Time.deltaTime);
     }
 
-    protected bool IsInfront(){
+    protected bool IsInfront()
+    {
         Vector3 directionToPlayer = _stateMachine.transform.position - _stateMachine.Player.transform.position;
         float angle = Vector3.Angle(-_stateMachine.transform.forward, directionToPlayer);
 
-        return Mathf.Abs(angle) < 90;
+        return Mathf.Abs(angle) < 45;
     }
 
     #region Distance Checks
@@ -64,7 +65,7 @@ public abstract class BossBaseState : State
         return playerDistanceSqr <= _stateMachine.PunchDistance * _stateMachine.PunchDistance;
     }
 
-        protected bool IsInKickRange()
+    protected bool IsInKickRange()
     {
         float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
 

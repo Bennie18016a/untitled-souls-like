@@ -10,15 +10,16 @@ public class BossStateMachine : StateMachine
     [field: SerializeField] public ForceReciver ForceReciver { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Target Target { get; private set; }
+    [field: SerializeField] public WeaponDamage LeftFistWeaponDamage { get; private set; }
+    [field: SerializeField] public WeaponDamage RightFistWeaponDamage { get; private set; }
+    [field: SerializeField] public WeaponDamage KickWeaponDamage { get; private set; }
     #endregion
 
     #region Variables
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
-    [field: SerializeField] public int AttackDamage { get; private set; }
     [field: SerializeField] public float LookSpeed { get; private set; }
     [field: SerializeField] public float MovementSpeed { get; private set; }
-    [field: SerializeField] public float Knockback { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     [field: SerializeField] public bool Active { get; private set; }
     #region Distances
@@ -40,6 +41,10 @@ public class BossStateMachine : StateMachine
 
         NavMeshAgent.updatePosition = false;
         NavMeshAgent.updateRotation = false;
+
+        LeftFistWeaponDamage.SetDamage(5, 0);
+        RightFistWeaponDamage.SetDamage(5, 0);
+        KickWeaponDamage.SetDamage(15, 15);
 
         SwitchState(new BossChaseState(this));
     }
