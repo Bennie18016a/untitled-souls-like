@@ -63,7 +63,6 @@ public class BossStafeState : BossBaseState
 
     private void RandomBeheaviour()
     {
-        Debug.Log(_stateMachine.thisBoss == BossStateMachine.Boss.Goblin_King);
         int random = Random.Range(0, 4);
         if (random == 0)
         {

@@ -31,6 +31,7 @@ public class WeaponDamage : MonoBehaviour
         {
             if (health == PlayerHealth) return;
             health.DealDamage(_damage);
+            Debug.Log("Hit Player");
         }
 
         if (other.TryGetComponent<ForceReciver>(out ForceReciver forceReciver) && _knockback > 0)

@@ -16,6 +16,7 @@ public class BossStateMachine : StateMachine
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
     [field: SerializeField] public int AttackDamage { get; private set; }
+    [field: SerializeField] public float LookSpeed { get; private set; }
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float Knockback { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
@@ -55,6 +56,7 @@ public class BossStateMachine : StateMachine
         Health.OnDie -= HandleDie;
     }
     #endregion
+
 
     #region Events
     private void HandleTakeDamage()

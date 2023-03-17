@@ -30576,14 +30576,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.23333333
-    functionName: EnableWeapon
+    functionName: EnableRightHand
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.6333333
-    functionName: DisableWeapon
+    functionName: DisableRightHand
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

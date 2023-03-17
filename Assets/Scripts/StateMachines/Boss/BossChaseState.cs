@@ -18,9 +18,15 @@ public class BossChaseState : BossBaseState
     {
         if (!_stateMachine.Active) { return; }
 
-        if (IsInStafeRange())
+        int random = Random.Range(0, 4);
+        if (random == 0)
         {
-            _stateMachine.SwitchState(new BossStafeState(_stateMachine));
+            switch (_stateMachine.thisBoss)
+            {
+                case BossStateMachine.Boss.Goblin_King:
+                    _stateMachine.SwitchState(new KingAttackingState(_stateMachine));
+                    break;
+            }
         }
 
         MoveToPlayer(deltaTime);

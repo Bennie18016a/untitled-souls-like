@@ -10,30 +10,40 @@ public class KingAttackingState : BossBaseState
 
     public override void Enter()
     {
-        int RandomAttack = Random.Range(0, 1) + 1;
+        int RandomAttack = Random.Range(0, 2) + 1;
 
         switch (RandomAttack)
         {
             case 1:
                 Attack = "Punch";
                 break;
+            case 2:
+                Attack = "Kick";
+                break;
         }
     }
 
     public override void Tick(float deltaTime)
     {
-        if (Attack == "Punch" && IsInPunchRange())
+        MoveToPlayer(deltaTime);
+        FacePlayer();
+
+        switch (Attack)
         {
-            _stateMachine.SwitchState(new KingPunchState(_stateMachine, Random.Range(0, 2)));
+            case "Punch":
+                if (!IsInPunchRange() || !IsInfront()) return;
+                _stateMachine.SwitchState(new KingPunchState(_stateMachine, Random.Range(0, 2)));
+                break;
+            case "Kick":
+                if (!IsInKickRange() || !IsInfront()) return;
+                _stateMachine.SwitchState(new KingKickState(_stateMachine));
+                break;
         }
 
         if (AttackTime >= _stateMachine.MaxAttackAttemptTime)
         {
             _stateMachine.SwitchState(new BossChaseState(_stateMachine));
         }
-
-        MoveToPlayer(deltaTime);
-        FacePlayer();
 
         AttackTime += 1 * Time.deltaTime;
     }
