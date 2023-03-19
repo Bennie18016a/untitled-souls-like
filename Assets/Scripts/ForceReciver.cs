@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ForceReciver : MonoBehaviour
 {
-    public Vector3 movement => _impact + Vector3.up * verticalVelocity;
     [SerializeField] CharacterController cc;
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
     [SerializeField] float drag = 0.3f;
@@ -12,6 +11,8 @@ public class ForceReciver : MonoBehaviour
     private float verticalVelocity;
     private Vector3 _impact;
     private Vector3 _dampingVelocity;
+
+    public Vector3 movement => _impact + Vector3.up * verticalVelocity;
 
 
     private void Update()
@@ -36,12 +37,17 @@ public class ForceReciver : MonoBehaviour
 
     public void AddForce(Vector3 force)
     {
-                Debug.Log(_impact);
         _impact += force;
-        Debug.Log(_impact);
         if (agent != null)
         {
             agent.enabled = false;
         }
+    }
+
+    public void Throw(Vector3 direction, float force)
+    {
+        _impact += direction * 150;
+        verticalVelocity += force;
+
     }
 }

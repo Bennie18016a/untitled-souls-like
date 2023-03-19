@@ -13,14 +13,17 @@ public class BossStateMachine : StateMachine
     [field: SerializeField] public WeaponDamage LeftFistWeaponDamage { get; private set; }
     [field: SerializeField] public WeaponDamage RightFistWeaponDamage { get; private set; }
     [field: SerializeField] public WeaponDamage KickWeaponDamage { get; private set; }
+    [field: SerializeField] public WeaponDamage GrabWeaponDamage { get; private set; }
     #endregion
 
     #region Variables
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
+    [field: SerializeField] public PreThrowHandler PreThrowHandler { get; private set; }
     [field: SerializeField] public float LookSpeed { get; private set; }
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
+    [field: SerializeField] public float MaxWaitToGrabTime { get; private set; }
     [field: SerializeField] public bool Active { get; private set; }
     #region Distances
     [field: SerializeField] public float StrafeDistance { get; private set; }
@@ -45,6 +48,7 @@ public class BossStateMachine : StateMachine
         LeftFistWeaponDamage.SetDamage(5, 0);
         RightFistWeaponDamage.SetDamage(5, 0);
         KickWeaponDamage.SetDamage(15, 15);
+        GrabWeaponDamage.SetDamage(20, 0);
 
         SwitchState(new BossChaseState(this));
     }

@@ -45,9 +45,9 @@ public class Health : MonoBehaviour
         isInvunerable = set;
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(int damage, bool ignore)
     {
-        if (isInvunerable) return;
+        if (isInvunerable && !ignore) return;
         _health = Mathf.Max(_health - damage, 0);
 
         OnTakeDamage?.Invoke();

@@ -8,6 +8,9 @@ public class WeaponDamage : MonoBehaviour
     [SerializeField] private Health PlayerHealth;
     private int _damage;
     private float _knockback;
+    private Vector3 _direction;
+    private float _force;
+    public bool AlwaysDealDamage;
     public List<Collider> AlreadyCollided = new List<Collider>();
 
     private void OnEnable()
@@ -21,6 +24,12 @@ public class WeaponDamage : MonoBehaviour
         this._knockback = Knockback;
     }
 
+    public void Force(Vector3 direction, float force)
+    {
+        this._direction = direction;
+        this._force = force;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other == playerCollider) { return; }
@@ -30,7 +39,7 @@ public class WeaponDamage : MonoBehaviour
         if (other.TryGetComponent<Health>(out Health health))
         {
             if (health == PlayerHealth) return;
-            health.DealDamage(_damage);
+            health.DealDamage(_damage, AlwaysDealDamage);
             Debug.Log("Hit Player");
         }
 
@@ -38,6 +47,11 @@ public class WeaponDamage : MonoBehaviour
         {
             Debug.Log("Knockback");
             forceReciver.AddForce((other.transform.position - playerCollider.transform.position).normalized * _knockback);
+        }
+
+        if (other.TryGetComponent<ForceReciver>(out ForceReciver _forceReciver) && _force > 0)
+        {
+            _forceReciver.Throw(_direction, _force);
         }
     }
 }

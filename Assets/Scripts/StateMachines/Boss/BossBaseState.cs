@@ -71,5 +71,12 @@ public abstract class BossBaseState : State
 
         return playerDistanceSqr <= _stateMachine.KickDistance * _stateMachine.KickDistance;
     }
+
+    protected bool IsInGrabRange()
+    {
+        float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= _stateMachine.ThrowDistance * _stateMachine.ThrowDistance;
+    }
     #endregion
 }

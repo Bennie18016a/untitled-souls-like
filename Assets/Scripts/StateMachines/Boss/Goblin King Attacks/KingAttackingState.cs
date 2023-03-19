@@ -10,7 +10,7 @@ public class KingAttackingState : BossBaseState
 
     public override void Enter()
     {
-        int RandomAttack = Random.Range(0, 2) + 1;
+        int RandomAttack = Random.Range(0, 3) + 1;
 
         switch (RandomAttack)
         {
@@ -20,7 +20,12 @@ public class KingAttackingState : BossBaseState
             case 2:
                 Attack = "Kick";
                 break;
+            case 3:
+                Attack = "Grab";
+                break;
         }
+
+        Debug.Log(Attack);
     }
 
     public override void Tick(float deltaTime)
@@ -37,6 +42,10 @@ public class KingAttackingState : BossBaseState
             case "Kick":
                 if (!IsInKickRange() || !IsInfront()) return;
                 _stateMachine.SwitchState(new KingKickState(_stateMachine));
+                break;
+            case "Grab":
+                if (!IsInGrabRange() || !IsInfront()) return;
+                _stateMachine.SwitchState(new KingWaitToThrowState(_stateMachine));
                 break;
         }
 
