@@ -15,6 +15,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public Stats Stats { get; private set; }
+    [field: SerializeField] public UseQuickItem UseQuickItem { get; private set; }
     #endregion
 
     #region Variables

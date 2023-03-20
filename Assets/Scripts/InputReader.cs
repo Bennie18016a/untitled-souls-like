@@ -22,6 +22,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action CancelEvent;
     public event Action TargetEvent;
     public event Action DodgeEvent;
+    public event Action QuickItemEvent;
     #endregion
 
     private void Start()
@@ -85,5 +86,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         DodgeEvent?.Invoke();
 
+    }
+
+    public void OnUseQuickItem(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        QuickItemEvent?.Invoke();
     }
 }

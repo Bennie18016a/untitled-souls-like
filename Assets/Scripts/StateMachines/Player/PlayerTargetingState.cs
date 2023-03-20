@@ -12,6 +12,8 @@ public class PlayerTargetingState : PlayerBaseState
     {
         _stateMachine.InputReader.CancelEvent += OnCancel;
         _stateMachine.InputReader.DodgeEvent += OnDodge;
+        _stateMachine.InputReader.QuickItemEvent += OnQuickItem;
+
 
         _stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, 0.1f);
     }
@@ -91,11 +93,17 @@ public class PlayerTargetingState : PlayerBaseState
 
         _stateMachine.SwitchState(new PlayerDodgeState(_stateMachine, _stateMachine.InputReader.MovementValue));
     }
+
+    private void OnQuickItem()
+    {
+        _stateMachine.UseQuickItem.UseItem(_stateMachine);
+    }
     #endregion
 
     public override void Exit()
     {
         _stateMachine.InputReader.CancelEvent -= OnCancel;
         _stateMachine.InputReader.DodgeEvent -= OnDodge;
+        _stateMachine.InputReader.QuickItemEvent -= OnQuickItem;
     }
 }

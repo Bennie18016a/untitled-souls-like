@@ -15,6 +15,7 @@ public class PlayerFreeLookState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
+        _stateMachine.InputReader.QuickItemEvent += OnQuickItem;
 
         _stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, 0.1f);
     }
@@ -81,9 +82,16 @@ public class PlayerFreeLookState : PlayerBaseState
         if (!_stateMachine.Targeter.SelectTarget()) return;
         _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
     }
+
+    private void OnQuickItem()
+    {
+        _stateMachine.UseQuickItem.UseItem(_stateMachine);
+    }
+
     public override void Exit()
     {
         _stateMachine.InputReader.TargetEvent -= OnTarget;
+        _stateMachine.InputReader.QuickItemEvent -= OnQuickItem;
     }
 }
 

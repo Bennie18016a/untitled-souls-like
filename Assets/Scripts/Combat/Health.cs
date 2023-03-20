@@ -66,6 +66,11 @@ public class Health : MonoBehaviour
         MaximumHealth = (int)newHealth;
     }
 
+    public void AddHealth(int health)
+    {
+        _health = Mathf.Min(_health + health, MaximumHealth);
+    }
+
     private void UpdateSlider()
     {
         HealthSlider.GetComponent<Slider>().value = _health;
