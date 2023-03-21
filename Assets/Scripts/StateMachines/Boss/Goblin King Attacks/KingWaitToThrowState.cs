@@ -11,12 +11,14 @@ public class KingWaitToThrowState : BossBaseState
 
     public override void Enter()
     {
+        _stateMachine.GrabWeaponDamage.Force(-_stateMachine.transform.forward, 10);
         _stateMachine.Animator.CrossFadeInFixedTime("Start_Throw", 0.1f);
     }
 
     public override void Tick(float deltaTime)
     {
-        if (_stateMachine.PreThrowHandler.InArea())
+        bool maxWait = time > _stateMachine.MaxWaitToGrabTime;
+        if (_stateMachine.PreThrowHandler.InArea() || maxWait)
         {
             _stateMachine.SwitchState(new KingThrowState(_stateMachine));
         }
@@ -25,11 +27,6 @@ public class KingWaitToThrowState : BossBaseState
         {
             forceRecived = true;
             _stateMachine.ForceReciver.AddForce(_stateMachine.transform.forward * 15);
-        }
-
-        if (time > _stateMachine.MaxWaitToGrabTime)
-        {
-            _stateMachine.SwitchState(new BossChaseState(_stateMachine));
         }
 
         Move(deltaTime);

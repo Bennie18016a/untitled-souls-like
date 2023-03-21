@@ -12,7 +12,6 @@ public class KingThrowState : BossBaseState
 
     public override void Enter()
     {
-        _stateMachine.GrabWeaponDamage.Force(-_stateMachine.transform.forward, 10);
         _stateMachine.Animator.CrossFadeInFixedTime("Throw", 0.1f);
     }
 

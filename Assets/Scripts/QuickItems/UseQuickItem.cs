@@ -90,7 +90,7 @@ public class UseQuickItem : MonoBehaviour
     {
         active.Number--;
         _stateMachine.SwitchState(new PlayerDrinkState(_stateMachine));
-        _stateMachine.Health.AddHealth(10);
+        _stateMachine.Health.AddHealth(20);
     }
 
     private void EssenceOfStamina(PlayerStateMachine _stateMachine, QuickItem active)
