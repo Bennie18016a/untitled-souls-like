@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class BossStateMachine : StateMachine
 {
     #region Scripts
+    [field: Header("Scripts")]
     [field: SerializeField] public Animator Animator { get; private set; }
     [field: SerializeField] public ForceReciver ForceReciver { get; private set; }
     [field: SerializeField] public Health Health { get; private set; }
@@ -17,6 +18,7 @@ public class BossStateMachine : StateMachine
     #endregion
 
     #region Variables
+    [field: Header("Variables")]
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
     [field: SerializeField] public PreThrowHandler PreThrowHandler { get; private set; }
@@ -24,8 +26,9 @@ public class BossStateMachine : StateMachine
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     [field: SerializeField] public float MaxWaitToGrabTime { get; private set; }
-    [field: SerializeField] public bool Active { get; private set; }
+    [field: SerializeField] public bool Active { get; set; }
     #region Distances
+    [field: Header("Distances")]
     [field: SerializeField] public float StrafeDistance { get; private set; }
     [field: SerializeField] public float PunchDistance { get; private set; }
     [field: SerializeField] public float KickDistance { get; private set; }
@@ -65,7 +68,6 @@ public class BossStateMachine : StateMachine
         Health.OnDie -= HandleDie;
     }
     #endregion
-
 
     #region Events
     private void HandleTakeDamage()

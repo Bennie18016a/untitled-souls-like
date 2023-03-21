@@ -6,7 +6,7 @@ using UnityEngine;
 public class KingWaitToThrowState : BossBaseState
 {
     float time;
-
+    bool forceRecived;
     public KingWaitToThrowState(BossStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
@@ -19,6 +19,12 @@ public class KingWaitToThrowState : BossBaseState
         if (_stateMachine.PreThrowHandler.InArea())
         {
             _stateMachine.SwitchState(new KingThrowState(_stateMachine));
+        }
+
+        if (time > .25 && !forceRecived)
+        {
+            forceRecived = true;
+            _stateMachine.ForceReciver.AddForce(_stateMachine.transform.forward * 15);
         }
 
         if (time > _stateMachine.MaxWaitToGrabTime)

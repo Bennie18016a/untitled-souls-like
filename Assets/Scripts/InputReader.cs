@@ -25,6 +25,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action DodgeEvent;
     public event Action QuickItemEvent;
     public event Action SwitchQuickItemEvent;
+    public event Action InteractAction;
     #endregion
 
     private void Start()
@@ -103,5 +104,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         if (!context.performed) { return; }
         SwitchQuickItemEvent?.Invoke();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+        InteractAction?.Invoke();
     }
 }
