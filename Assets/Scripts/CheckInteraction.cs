@@ -8,7 +8,7 @@ public class CheckInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.tag == "Player") inArea = true;
+        if (other.transform.tag == "Player") inArea = true;
     }
 
     public bool IsInArea()
@@ -16,8 +16,13 @@ public class CheckInteraction : MonoBehaviour
         return inArea;
     }
 
+    public bool HasKey(string doorName)
+    {
+        return GameObject.FindGameObjectWithTag("Player").GetComponent<KeyInventory>().CheckKey(doorName);
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if(other.transform.tag == "Player") inArea = false;
+        if (other.transform.tag == "Player") inArea = false;
     }
 }

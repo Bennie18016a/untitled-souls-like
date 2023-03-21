@@ -31,7 +31,7 @@ public class Interaction : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case Type.keydoor:
-                //Check if they have key
+                if (!GetComponent<CheckInteraction>().HasKey(transform.name)) return;
                 Destroy(gameObject);
                 break;
             case Type.onesidedoor:
