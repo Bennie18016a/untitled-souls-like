@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 
 public class Interaction : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class Interaction : MonoBehaviour
     public InputReader ir;
     private GameObject player;
     public float range = 3f;
+    public TMP_Text text;
+    private Controls _controls;
 
     private void OnEnable()
     {
@@ -18,6 +22,33 @@ public class Interaction : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        _controls = new Controls();
+    }
+
+    private void Update()
+    {
+        ShowText();
+    }
+
+    private void ShowText()
+    {
+        if (Vector3.Distance(transform.position, player.transform.position) < range)
+        {
+            text.transform.parent.gameObject.SetActive(true);
+            if (_type == Type.fogwall)
+            {
+                text.text = string.Format("{0}: Enter the fog", _controls.Player.Interact.GetBindingDisplayString());
+            }
+            else
+            {
+                text.text = string.Format("{0}: Open Door", _controls.Player.Interact.GetBindingDisplayString());
+            }
+        }
+        else if (Vector3.Distance(transform.position, player.transform.position) < range + 1.5f)
+        {
+            text.transform.parent.gameObject.SetActive(false);
+            text.text = null;
+        }
     }
 
     public void Interact()
@@ -55,5 +86,7 @@ public class Interaction : MonoBehaviour
     private void OnDestroy()
     {
         ir.InteractAction -= Interact;
+        text.transform.parent.gameObject.SetActive(false);
+        text.text = null;
     }
 }
