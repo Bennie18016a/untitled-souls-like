@@ -89,6 +89,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchQuickItem"",
+                    ""type"": ""Value"",
+                    ""id"": ""672a16d1-fc26-4ad3-a4a3-507e19319a21"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,61 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""UseQuickItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Scroll Up/Down"",
+                    ""id"": ""2dd4acb1-5e6c-4631-9010-bde02be8e1f4"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchQuickItem"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""id"": ""c903e586-3773-4297-bd66-171e18181a6c"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchQuickItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Down"",
+                    ""id"": ""b4da5b38-693b-4762-87ef-7b1ed00c9bdc"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""SwitchQuickItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Left"",
+                    ""id"": ""899b0e3f-1177-43a4-8ee9-bb39fb4a15e4"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchQuickItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Right"",
+                    ""id"": ""b1fa4ab9-63a1-4cd3-87e2-c8a61b3428c5"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchQuickItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -244,6 +308,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Player_Block = m_Player.FindAction("Block", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_UseQuickItem = m_Player.FindAction("UseQuickItem", throwIfNotFound: true);
+        m_Player_SwitchQuickItem = m_Player.FindAction("SwitchQuickItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -310,6 +375,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Block;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_UseQuickItem;
+    private readonly InputAction m_Player_SwitchQuickItem;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -321,6 +387,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Block => m_Wrapper.m_Player_Block;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @UseQuickItem => m_Wrapper.m_Player_UseQuickItem;
+        public InputAction @SwitchQuickItem => m_Wrapper.m_Player_SwitchQuickItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,6 +418,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @UseQuickItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseQuickItem;
                 @UseQuickItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseQuickItem;
                 @UseQuickItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseQuickItem;
+                @SwitchQuickItem.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchQuickItem;
+                @SwitchQuickItem.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchQuickItem;
+                @SwitchQuickItem.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchQuickItem;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -376,6 +446,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @UseQuickItem.started += instance.OnUseQuickItem;
                 @UseQuickItem.performed += instance.OnUseQuickItem;
                 @UseQuickItem.canceled += instance.OnUseQuickItem;
+                @SwitchQuickItem.started += instance.OnSwitchQuickItem;
+                @SwitchQuickItem.performed += instance.OnSwitchQuickItem;
+                @SwitchQuickItem.canceled += instance.OnSwitchQuickItem;
             }
         }
     }
@@ -398,5 +471,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnBlock(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnUseQuickItem(InputAction.CallbackContext context);
+        void OnSwitchQuickItem(InputAction.CallbackContext context);
     }
 }

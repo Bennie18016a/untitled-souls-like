@@ -9,6 +9,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     #region Public Values
     public Vector2 MovementValue { get; private set; }
     public Vector2 MouseValue { get; private set; }
+    public Vector2 ScrollWheelValue { get; private set; }
     public bool IsAttacking { get; private set; }
     public bool IsBlocking { get; private set; }
     #endregion
@@ -23,6 +24,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action TargetEvent;
     public event Action DodgeEvent;
     public event Action QuickItemEvent;
+    public event Action SwitchQuickItemEvent;
     #endregion
 
     private void Start()
@@ -93,5 +95,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (!context.performed) { return; }
 
         QuickItemEvent?.Invoke();
+    }
+
+    public void OnSwitchQuickItem(InputAction.CallbackContext context)
+    {
+        ScrollWheelValue = context.ReadValue<Vector2>();
+
+        if (!context.performed) { return; }
+        SwitchQuickItemEvent?.Invoke();
     }
 }

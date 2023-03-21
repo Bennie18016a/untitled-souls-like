@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c96cccb73b56e144486a62a9e8918f76, type: 3}
-  m_Name: Celestrial Nectar
+  m_Name: Essence of Stamina
   m_EditorClassIdentifier: 
-  ItemName: Celestrial Nectar
-  ID: 0
+  ItemName: Essence of Stamina
+  ID: 1
   Number: 3
-  DefaultNumber: 5
-  Active: 1
+  DefaultNumber: 3
+  Active: 0

@@ -35,6 +35,12 @@ public class Stamina : MonoBehaviour
     {
         _stamina = Mathf.Max(_stamina - stamina, 0);
     }
+
+    public void AddStamina(int stamina)
+    {
+        _stamina = Mathf.Min(_stamina + stamina, maxStamina);
+    }
+
     public void SetMaxStamina(float multipler)
     {
         float newStamina = maxStamina * multipler;
@@ -46,7 +52,8 @@ public class Stamina : MonoBehaviour
         canNaturalStamina = canStamina;
     }
 
-    public bool CanAction(int toTake){
+    public bool CanAction(int toTake)
+    {
         int newStamina = _stamina - toTake;
         return newStamina > 0;
     }
