@@ -245,7 +245,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""40c1b095-0837-4ba8-a7ac-db66ad139db2"",
-                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""path"": ""<Gamepad>/rightStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -256,7 +256,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""c42a55ff-81c5-4594-90a8-6a7d5d9eaf7e"",
-                    ""path"": ""<Gamepad>/rightStick/up"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
