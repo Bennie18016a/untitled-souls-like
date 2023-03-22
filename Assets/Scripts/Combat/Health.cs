@@ -34,7 +34,6 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if (_isDead) { Destroy(gameObject); }
         if (HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
     }
     #endregion

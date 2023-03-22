@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: Celestial Nectar
   ID: 0
-  Number: 5
-  DefaultNumber: 5
+  Number: 3
+  DefaultNumber: 7
   Active: 1

@@ -55,6 +55,6 @@ public class PlayerStateMachine : StateMachine
     }
     private void HandleDie()
     {
-        Debug.Log("Died");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

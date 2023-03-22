@@ -47,7 +47,7 @@ public abstract class BossBaseState : State
         Vector3 directionToPlayer = _stateMachine.transform.position - _stateMachine.Player.transform.position;
         float angle = Vector3.Angle(-_stateMachine.transform.forward, directionToPlayer);
 
-        return Mathf.Abs(angle) < 45;
+        return Mathf.Abs(angle) < 30;
     }
 
     #region Distance Checks

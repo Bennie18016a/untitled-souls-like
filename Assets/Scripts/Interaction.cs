@@ -10,6 +10,7 @@ public class Interaction : MonoBehaviour
     public enum Type { door, keydoor, onesidedoor, fogwall }
     public Type _type;
     public InputReader ir;
+    public TextMenu textMenu;
     private GameObject player;
     public float range = 3f;
     public TMP_Text text;
@@ -44,7 +45,7 @@ public class Interaction : MonoBehaviour
                 text.text = string.Format("{0}: Open Door", _controls.Player.Interact.GetBindingDisplayString());
             }
         }
-        else if (Vector3.Distance(transform.position, player.transform.position) < range + 1.5f)
+        else if (Vector3.Distance(transform.position, player.transform.position) < range + 1.5f || textMenu.InMenu())
         {
             text.transform.parent.gameObject.SetActive(false);
             text.text = null;
@@ -62,16 +63,23 @@ public class Interaction : MonoBehaviour
                 Destroy(gameObject);
                 break;
             case Type.keydoor:
-                if (!GetComponent<CheckInteraction>().HasKey(transform.name)) return;
+                if (!GetComponent<CheckInteraction>().HasKey(transform.name))
+                {
+                    textMenu.OpenMenu("Key required");
+                    return;
+                }
                 Destroy(gameObject);
                 break;
             case Type.onesidedoor:
-                if (!GetComponentInChildren<CheckInteraction>().IsInArea()) return;
+                if (!GetComponentInChildren<CheckInteraction>().IsInArea())
+                {
+                    textMenu.OpenMenu("This door is opened elsewhere");
+                    return;
+                }
                 Destroy(gameObject);
                 break;
             case Type.fogwall:
                 if (!transform.GetChild(1).GetComponent<CheckInteraction>().IsInArea()) return;
-                Debug.Log("Here");
                 player.transform.position = transform.GetChild(0).transform.position;
                 GetComponent<FogWall>().boss.GetComponent<BossStateMachine>().Active = true;
                 break;
