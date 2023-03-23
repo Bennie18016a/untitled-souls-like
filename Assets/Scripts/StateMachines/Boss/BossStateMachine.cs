@@ -76,6 +76,7 @@ public class BossStateMachine : StateMachine
     }
     private void HandleDie()
     {
+        GetComponent<Drops>().Died();
         GameObject.Destroy(gameObject);
     }
     #endregion
