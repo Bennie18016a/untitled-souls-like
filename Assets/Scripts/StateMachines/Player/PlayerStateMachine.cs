@@ -36,6 +36,10 @@ public class PlayerStateMachine : StateMachine
     {
         MainCameraTransform = Camera.main.transform;
         respawnPoint = transform.position;
+    }
+
+    private void Start()
+    {
         SwitchState(new PlayerRespawnState(this));
     }
 

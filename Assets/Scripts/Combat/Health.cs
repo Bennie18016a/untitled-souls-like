@@ -26,7 +26,6 @@ public class Health : MonoBehaviour
     private void Start()
     {
         _health = MaximumHealth;
-        HealthSlider.GetComponent<Slider>().maxValue = MaximumHealth;
 
         if (gameObject.name == "Player") return;
         HealthSlider.SetActive(false);
@@ -34,6 +33,7 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
+        HealthSlider.GetComponent<Slider>().maxValue = MaximumHealth;
         if (HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
     }
     #endregion
@@ -66,7 +66,6 @@ public class Health : MonoBehaviour
 
     public void AddHealth(int health)
     {
-        Debug.Log(string.Format("{0}: Here", transform.name));
         _health = Mathf.Min(_health + health, MaximumHealth);
     }
 

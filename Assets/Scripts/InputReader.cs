@@ -5,28 +5,34 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class InputReader : MonoBehaviour, Controls.IPlayerActions
+public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIActions
 {
     #region Public Values
     public Vector2 MovementValue { get; private set; }
     public Vector2 MouseValue { get; private set; }
     public Vector2 ScrollWheelValue { get; private set; }
     public bool IsAttacking { get; private set; }
+    public bool IsHeavyAttacking { get; private set; }
     public bool IsBlocking { get; private set; }
     #endregion
 
     #region Private Values
     private Controls _controls;
     private bool Targeting;
+    private bool inUI;
     #endregion
 
-    #region Events
+    #region Player Events
     public event Action CancelEvent;
     public event Action TargetEvent;
     public event Action DodgeEvent;
     public event Action QuickItemEvent;
     public event Action SwitchQuickItemEvent;
     public event Action InteractAction;
+    #endregion
+
+    #region UI Events
+    //public event Action BackEvent;
     #endregion
 
     private void Start()
@@ -40,10 +46,29 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         _controls.Player.Enable();
     }
 
+    public void GoToUI()
+    {
+        if (inUI)
+        {
+            inUI = false;
+            _controls.Player.Enable();
+            _controls.UI.Disable();
+        }
+        else
+        {
+            inUI = true;
+            _controls.Player.Disable();
+            _controls.UI.Enable();
+        }
+    }
+
     private void OnDestroy()
     {
         _controls.Player.Disable();
+        _controls.UI.Disable();
     }
+
+    #region Player
 
     public void OnMovement(InputAction.CallbackContext context)
     {
@@ -112,4 +137,27 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (!context.performed) { return; }
         InteractAction?.Invoke();
     }
+
+    public void OnHeavyAttack(InputAction.CallbackContext context)
+    {
+        IsHeavyAttacking = context.performed;
+    }
+    #endregion
+
+    #region UI
+    public void OnNavigate(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnSelect(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+
+    }
+    #endregion
 }

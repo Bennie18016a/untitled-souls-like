@@ -26,6 +26,11 @@ public class PlayerTargetingState : PlayerBaseState
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
             return;
         }
+        if (_stateMachine.InputReader.IsHeavyAttacking && _stateMachine.Stamina.CanAction(_stateMachine.Attacks[3].StaminaCost))
+        {
+            _stateMachine.SwitchState(new PlayerHeavyAttackingState(_stateMachine, 3));
+            return;
+        }
         if (_stateMachine.InputReader.IsBlocking)
         {
             _stateMachine.SwitchState(new PlayerBlockState(_stateMachine));

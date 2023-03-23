@@ -46,7 +46,6 @@ public class EnemyStrafeState : EnemyBaseState
         }
 
         pos = _stateMachine.transform.position;
-        Debug.Log(Vector3.Distance(_stateMachine.transform.position, newPos));
     }
 
     private void MoveToDest(Vector3 pos, float deltaTime)
@@ -82,7 +81,6 @@ public class EnemyStrafeState : EnemyBaseState
 
     public override void Exit()
     {
-        Debug.Log("Finished Strafe");
         _stateMachine.NavMeshAgent.ResetPath();
         _stateMachine.NavMeshAgent.velocity = Vector3.zero;
     }

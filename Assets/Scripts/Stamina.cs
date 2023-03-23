@@ -19,11 +19,11 @@ public class Stamina : MonoBehaviour
     {
         _stamina = maxStamina;
         canNaturalStamina = true;
-        StaminaSlider.GetComponent<Slider>().maxValue = maxStamina;
     }
 
     private void Update()
     {
+        StaminaSlider.GetComponent<Slider>().maxValue = maxStamina;
         NaturalStamina();
         if (StaminaSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
         naturalStaminaTime += 1 * Time.deltaTime;
