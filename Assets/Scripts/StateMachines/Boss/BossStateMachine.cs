@@ -48,10 +48,10 @@ public class BossStateMachine : StateMachine
         NavMeshAgent.updatePosition = false;
         NavMeshAgent.updateRotation = false;
 
-        LeftFistWeaponDamage.SetDamage(5, 0);
-        RightFistWeaponDamage.SetDamage(5, 0);
-        KickWeaponDamage.SetDamage(15, 15);
-        GrabWeaponDamage.SetDamage(20, 0);
+        LeftFistWeaponDamage.SetDamage(15, 5);
+        RightFistWeaponDamage.SetDamage(15, 5);
+        KickWeaponDamage.SetDamage(30, 15);
+        GrabWeaponDamage.SetDamage(40, 0);
 
         SwitchState(new BossChaseState(this));
     }

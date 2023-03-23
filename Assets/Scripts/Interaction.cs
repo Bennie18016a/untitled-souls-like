@@ -7,7 +7,7 @@ using TMPro;
 
 public class Interaction : MonoBehaviour
 {
-    public enum Type { door, keydoor, onesidedoor, fogwall }
+    public enum Type { door, keydoor, onesidedoor, fogwall, beacon }
     public Type _type;
     public InputReader ir;
     public TextMenu textMenu;
@@ -39,6 +39,10 @@ public class Interaction : MonoBehaviour
             if (_type == Type.fogwall)
             {
                 text.text = string.Format("{0}: Enter the fog", _controls.Player.Interact.GetBindingDisplayString());
+            }
+            else if (_type == Type.beacon)
+            {
+                text.text = string.Format("{0}: Rest at beacpn", _controls.Player.Interact.GetBindingDisplayString());
             }
             else
             {
@@ -82,6 +86,10 @@ public class Interaction : MonoBehaviour
                 if (!transform.GetChild(1).GetComponent<CheckInteraction>().IsInArea()) return;
                 player.transform.position = transform.GetChild(0).transform.position;
                 GetComponent<FogWall>().boss.GetComponent<BossStateMachine>().Active = true;
+                break;
+            case Type.beacon:
+                player.GetComponent<PlayerStateMachine>().SwitchState(new PlayerRespawnState(player.GetComponent<PlayerStateMachine>()));
+                GetComponent<BeaconMenu>().OpenMenu();
                 break;
         }
     }

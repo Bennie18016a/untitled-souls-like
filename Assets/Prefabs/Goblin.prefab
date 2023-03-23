@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 543450653133813024}
   PlayerHealth: {fileID: 543450653133813027}
+  AlwaysDealDamage: 0
   AlreadyCollided: []
 --- !u!64 &31612762
 MeshCollider:
@@ -1205,7 +1206,7 @@ MonoBehaviour:
   <PlayerDetectionRange>k__BackingField: 7
   <AttackRange>k__BackingField: 1.3
   <StrafeRange>k__BackingField: 4
-  <AttackDamage>k__BackingField: 20
+  <AttackDamage>k__BackingField: 40
   <Knockback>k__BackingField: 3
   <MaxAttackAttemptTime>k__BackingField: 5
 --- !u!1 &5637029400578699184

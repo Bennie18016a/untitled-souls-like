@@ -59,14 +59,14 @@ public class Health : MonoBehaviour
         HealthSlider.SetActive(toggle);
     }
 
-    public void SetMaxHealth(float multipler)
+    public void SetMaxHealth(int newMaxHealth)
     {
-        float newHealth = MaximumHealth * multipler;
-        MaximumHealth = (int)newHealth;
+        MaximumHealth = newMaxHealth;
     }
 
     public void AddHealth(int health)
     {
+        Debug.Log(string.Format("{0}: Here", transform.name));
         _health = Mathf.Min(_health + health, MaximumHealth);
     }
 

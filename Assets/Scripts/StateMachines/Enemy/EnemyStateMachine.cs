@@ -24,9 +24,14 @@ public class EnemyStateMachine : StateMachine
     [field: SerializeField] public float Knockback { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     public GameObject Player { get; private set; }
+    public Vector3 startPos { get; private set; }
     #endregion
 
     #region Unity Functions
+    private void Awake()
+    {
+        startPos = transform.position;
+    }
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -57,7 +62,7 @@ public class EnemyStateMachine : StateMachine
     }
     private void HandleDie()
     {
-        GameObject.Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     #endregion
 

@@ -10,23 +10,35 @@ public class Targeter : MonoBehaviour
 
     public Target currentTarget { get; private set; }
 
+    private void Update()
+    {
+        GetRidOfDeadEnemies();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Target>(out Target target))
         {
             if (targets.Contains(target)) return;
+            if (!target.gameObject.activeInHierarchy) return;
 
-            targets.Add(target);
             target.onDestroyed += RemoveTarget;
+            targets.Add(target);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.transform.parent.TryGetComponent<Target>(out Target target))
+        if (other.TryGetComponent<Target>(out Target target))
         {
             targets.Remove(target);
-            RemoveTarget(target);
+            target.onDestroyed -= RemoveTarget;
+            if (currentTarget == target)
+            {
+                targetGroup.RemoveMember(target.transform);
+                currentTarget.gameObject.GetComponent<Health>().ToggleSlider(false);
+                currentTarget = null;
+            }
         }
     }
 
@@ -74,10 +86,26 @@ public class Targeter : MonoBehaviour
         currentTarget = null;
     }
 
+    public void GetRidOfDeadEnemies()
+    {
+        foreach (Target target in targets)
+        {
+            if (!target.gameObject.activeInHierarchy)
+            {
+                targets.Remove(target);
+
+                if (currentTarget == target)
+                {
+                    targetGroup.RemoveMember(target.transform);
+                    currentTarget.gameObject.GetComponent<Health>().ToggleSlider(false);
+                    currentTarget = null;
+                }
+            }
+        }
+    }
+
     private void RemoveTarget(Target target)
     {
-        /*if current target is out target in question
-        remove it from the target group and set it to null*/
         if (currentTarget == target)
         {
             targetGroup.RemoveMember(target.transform);
@@ -85,8 +113,6 @@ public class Targeter : MonoBehaviour
             currentTarget = null;
         }
 
-        /*We always remove the function from the action "onDestroyed"
-        remov the target from list*/
         target.onDestroyed -= RemoveTarget;
         targets.Remove(target);
     }

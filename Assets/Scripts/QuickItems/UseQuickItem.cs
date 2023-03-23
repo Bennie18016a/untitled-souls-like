@@ -16,15 +16,20 @@ public class UseQuickItem : MonoBehaviour
 
     private void Start()
     {
-        foreach (QuickItem quickItem in QuickItems)
-        {
-            quickItem.Number = quickItem.DefaultNumber;
-        }
+        ResetQuickItems();
     }
 
     private void Update()
     {
         itemText.text = string.Format("{0} - {1}", GetActive().ItemName, GetActive().Number);
+    }
+
+    public void ResetQuickItems()
+    {
+        foreach (QuickItem quickItem in QuickItems)
+        {
+            quickItem.Number = quickItem.DefaultNumber;
+        }
     }
 
     private void SwapItem()

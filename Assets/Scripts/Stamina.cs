@@ -41,10 +41,9 @@ public class Stamina : MonoBehaviour
         _stamina = Mathf.Min(_stamina + stamina, maxStamina);
     }
 
-    public void SetMaxStamina(float multipler)
+    public void SetMaxStamina(int newMaxStamina)
     {
-        float newStamina = maxStamina * multipler;
-        maxStamina = (int)newStamina;
+        maxStamina = newMaxStamina;
     }
 
     public void SetNaturalStamina(bool canStamina)

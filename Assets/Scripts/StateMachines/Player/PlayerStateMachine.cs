@@ -30,10 +30,12 @@ public class PlayerStateMachine : StateMachine
     public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
     #endregion
     public Transform MainCameraTransform { get; private set; }
+    public Vector3 respawnPoint;
 
     private void Awake()
     {
         MainCameraTransform = Camera.main.transform;
+        respawnPoint = transform.position;
         SwitchState(new PlayerRespawnState(this));
     }
 
@@ -55,6 +57,6 @@ public class PlayerStateMachine : StateMachine
     }
     private void HandleDie()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        SwitchState(new PlayerRespawnState(this));
     }
 }
