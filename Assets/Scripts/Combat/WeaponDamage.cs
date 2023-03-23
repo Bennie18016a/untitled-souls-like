@@ -34,6 +34,12 @@ public class WeaponDamage : MonoBehaviour
     {
         if (other == playerCollider) { return; }
         if (AlreadyCollided.Contains(other)) { return; }
+        if (other.transform.tag == "Wall" && playerCollider.transform.name == "Player")
+        {
+            playerCollider.gameObject.GetComponent<PlayerStateMachine>()
+            .SwitchState(new PlayerImpactState(playerCollider.gameObject.GetComponent<PlayerStateMachine>()));
+            gameObject.SetActive(false);
+        }
         AlreadyCollided.Add(other);
 
         if (other.TryGetComponent<Health>(out Health health))
