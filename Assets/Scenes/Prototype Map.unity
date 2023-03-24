@@ -7510,6 +7510,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1261809882, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
   m_PrefabInstance: {fileID: 1853600299}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1261809883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1261809884, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
+  m_PrefabInstance: {fileID: 1853600299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261809882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ced65f9626a9994f9d9caee3eb9d0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &1269254846
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13655,6 +13666,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 453113084, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453113084, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1261809883}
+    - target: {fileID: 453113084, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 453113084, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Beacons, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 453113084, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1381731628, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13901,11 +13932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494220167267, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000023841858
+      value: -0.00000047683716
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494486054072, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.3162277
+      value: 0.31622767
       objectReference: {fileID: 0}
     - target: {fileID: 5650813495155877406, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.w

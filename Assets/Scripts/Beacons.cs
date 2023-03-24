@@ -5,7 +5,7 @@ using UnityEngine;
 public class Beacons : MonoBehaviour
 {
     public InputReader ir;
-    public void ClsoeMenu()
+    public void CloseMenu()
     {
         ir.GoToUI();
         gameObject.SetActive(false);

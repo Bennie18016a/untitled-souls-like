@@ -9,9 +9,9 @@ public class BeaconMenu : MonoBehaviour
     public void OpenMenu()
     {
         beaconMenu.SetActive(true);
-        ir.GoToUI();
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>().respawnPoint = transform.position;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>()
         .SwitchState(new PlayerRespawnState(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>()));
+                ir.GoToUI();
     }
 }
