@@ -7,7 +7,7 @@ using TMPro;
 
 public class Interaction : MonoBehaviour
 {
-    public enum Type { door, keydoor, onesidedoor, fogwall, beacon }
+    public enum Type { door, keydoor, onesidedoor, fogwall, beacon, chest }
     public Type _type;
     public InputReader ir;
     public TextMenu textMenu;
@@ -42,7 +42,11 @@ public class Interaction : MonoBehaviour
             }
             else if (_type == Type.beacon)
             {
-                text.text = string.Format("{0}: Rest at beacpn", _controls.Player.Interact.GetBindingDisplayString());
+                text.text = string.Format("{0}: Rest at beacon", _controls.Player.Interact.GetBindingDisplayString());
+            }
+            else if (_type == Type.chest)
+            {
+                text.text = string.Format("{0}: Open Chest", _controls.Player.Interact.GetBindingDisplayString());
             }
             else
             {
@@ -90,6 +94,9 @@ public class Interaction : MonoBehaviour
             case Type.beacon:
                 player.GetComponent<PlayerStateMachine>().SwitchState(new PlayerRespawnState(player.GetComponent<PlayerStateMachine>()));
                 GetComponent<BeaconMenu>().OpenMenu();
+                break;
+            case Type.chest:
+                if (TryGetComponent<ChestLoot>(out ChestLoot chestLoot)) chestLoot.OpenChest();
                 break;
         }
     }
