@@ -49,7 +49,6 @@ public class PlayerDodgeState : PlayerBaseState
         {
             _stateMachine.SwitchState(new PlayerTargetingState(_stateMachine));
         }
-
     }
 
     public override void Exit()

@@ -16,6 +16,7 @@ public class PlayerFreeLookState : PlayerBaseState
     {
         _stateMachine.InputReader.TargetEvent += OnTarget;
         _stateMachine.InputReader.QuickItemEvent += OnQuickItem;
+        _stateMachine.InputReader.DodgeEvent += OnDodge;
 
         _stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, 0.1f);
     }
@@ -93,8 +94,17 @@ public class PlayerFreeLookState : PlayerBaseState
         _stateMachine.UseQuickItem.UseItem(_stateMachine);
     }
 
+    private void OnDodge()
+    {
+        if (_stateMachine.InputReader.MovementValue == Vector2.zero) return;
+        if (!_stateMachine.Stamina.CanAction(_stateMachine.DodgeStaminaCost)) { return; }
+
+        _stateMachine.SwitchState(new PlayerDodgeState(_stateMachine, _stateMachine.InputReader.MovementValue));
+    }
+
     public override void Exit()
     {
+        _stateMachine.InputReader.DodgeEvent -= OnDodge;
         _stateMachine.InputReader.TargetEvent -= OnTarget;
         _stateMachine.InputReader.QuickItemEvent -= OnQuickItem;
     }

@@ -18,6 +18,8 @@ public class PlayerBlockState : PlayerBaseState
     {
         _stateMachine.Health.Invunerable(true);
         _stateMachine.Stamina.SetNaturalStamina(false);
+        _stateMachine.InputReader.QuickItemEvent += OnQuickItem;
+        _stateMachine.InputReader.DodgeEvent += OnDodge;
 
         if (_stateMachine.Targeter.currentTarget == null) { _stateMachine.Animator.CrossFadeInFixedTime(FreeBlockBlendTree, 0.1f); }
         else { _stateMachine.Animator.CrossFadeInFixedTime(TargetBlockBlendTree, 0.1f); }
@@ -30,6 +32,11 @@ public class PlayerBlockState : PlayerBaseState
         {
             if (!_stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost)) { return; }
             _stateMachine.SwitchState(new PlayerAttackingState(_stateMachine, 0));
+            return;
+        }
+        if (_stateMachine.InputReader.IsHeavyAttacking && _stateMachine.Stamina.CanAction(_stateMachine.Attacks[3].StaminaCost))
+        {
+            _stateMachine.SwitchState(new PlayerHeavyAttackingState(_stateMachine, 3));
             return;
         }
         if (!_stateMachine.InputReader.IsBlocking)
@@ -121,9 +128,24 @@ public class PlayerBlockState : PlayerBaseState
         return forward * _stateMachine.InputReader.MovementValue.y + right * _stateMachine.InputReader.MovementValue.x;
     }
 
+    private void OnQuickItem()
+    {
+        _stateMachine.UseQuickItem.UseItem(_stateMachine);
+    }
+
+    private void OnDodge()
+    {
+        if (_stateMachine.InputReader.MovementValue == Vector2.zero) return;
+        if (!_stateMachine.Stamina.CanAction(_stateMachine.DodgeStaminaCost)) { return; }
+
+        _stateMachine.SwitchState(new PlayerDodgeState(_stateMachine, _stateMachine.InputReader.MovementValue));
+    }
+
     public override void Exit()
     {
         _stateMachine.Health.Invunerable(false);
         _stateMachine.Stamina.SetNaturalStamina(true);
+        _stateMachine.InputReader.QuickItemEvent -= OnQuickItem;
+        _stateMachine.InputReader.DodgeEvent -= OnDodge;
     }
 }
