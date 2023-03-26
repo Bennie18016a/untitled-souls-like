@@ -38,9 +38,15 @@ public class BossStateMachine : StateMachine
     public enum Boss { Goblin_King }
     public Boss thisBoss;
     public GameObject Player { get; private set; }
+    public Vector3 startPos { get; private set; }
     #endregion
 
     #region Unity Functions
+
+    private void Awake()
+    {
+        startPos = transform.position;
+    }
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");

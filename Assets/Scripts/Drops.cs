@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class Drops : MonoBehaviour
 {
-    public List<string> keys = new List<string>();
+    public ItemMenu itemMenu;
+    public List<Item> items = new List<Item>();
     public int currency;
 
     public void Died()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        foreach (string key in keys)
+        foreach (Item item in items)
         {
-            player.GetComponent<KeyInventory>().AddKey(key);
+            itemMenu.AddToList(item);
+
+            if (item.itemType == Item.ItemType.key)
+            {
+                player.GetComponent<KeyInventory>().AddKey(item.name);
+            }
         }
 
+        itemMenu.gameObject.SetActive(true);
         //add currency to player
     }
 }

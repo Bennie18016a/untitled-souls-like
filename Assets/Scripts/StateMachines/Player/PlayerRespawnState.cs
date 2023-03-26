@@ -26,6 +26,25 @@ public class PlayerRespawnState : PlayerBaseState
             entity.gameObject.SetActive(true);
         }
 
+        GameObject bosses = GameObject.Find("--Bosses--");
+
+        foreach (Transform boss in bosses.GetComponentInChildren<Transform>())
+        {
+            boss.GetComponent<BossStateMachine>().Active = false;
+            boss.position = boss.GetComponent<BossStateMachine>().startPos;
+            boss.GetComponent<Health>().AddHealth(10000000);
+        }
+
+        GameObject fogwalls = GameObject.Find("--FogWalls--");
+
+        foreach (Transform fogwall in fogwalls.GetComponentInChildren<Transform>())
+        {
+            if (fogwall.TryGetComponent<Interaction>(out Interaction interaction))
+            {
+                interaction.enabled = true;
+            }
+        }
+
 
         _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine));
     }

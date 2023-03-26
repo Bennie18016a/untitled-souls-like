@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UseQuickItem : MonoBehaviour
 {
     public InputReader ir;
     public TMP_Text itemText;
+    public Image itemImage;
     public List<QuickItem> QuickItems = new List<QuickItem>();
 
     private void OnEnable()
@@ -21,13 +23,24 @@ public class UseQuickItem : MonoBehaviour
 
     private void Update()
     {
-        itemText.text = string.Format("{0} - {1}", GetActive().ItemName, GetActive().Number);
+        itemText.text = GetActive().Number.ToString();
+        itemImage.sprite = GetActive().Icon;
+        CheckMax();
+    }
+
+    private void CheckMax()
+    {
+        foreach (QuickItem quickItem in QuickItems)
+        {
+            if (quickItem.Number > 99) quickItem.Number = 99;
+        }
     }
 
     public void ResetQuickItems()
     {
         foreach (QuickItem quickItem in QuickItems)
         {
+            if (quickItem.Number > quickItem.DefaultNumber) return;
             quickItem.Number = quickItem.DefaultNumber;
         }
     }

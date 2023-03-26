@@ -6,6 +6,7 @@ public class ChestLoot : MonoBehaviour
 {
     public List<string> keys = new List<string>();
     public List<QuickItem> quickItems = new List<QuickItem>();
+    public ItemMenu itemMenu;
 
     public void OpenChest()
     {
@@ -19,10 +20,11 @@ public class ChestLoot : MonoBehaviour
         foreach (QuickItem quickItem in quickItems)
         {
             player.GetComponent<UseQuickItem>().QuickItems[quickItem.ID].Number++;
+            itemMenu.AddToList(quickItem);
         }
 
         GetComponent<Animator>().SetTrigger("Open");
-
+        itemMenu.gameObject.SetActive(true);
         Destroy(this);
     }
 }

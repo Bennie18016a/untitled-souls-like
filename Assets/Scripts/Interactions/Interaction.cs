@@ -82,7 +82,7 @@ public class Interaction : MonoBehaviour
                 if (!GetComponentInChildren<CheckInteraction>().IsInArea())
                 {
                     textMenu.OpenMenu("This door is opened elsewhere");
-                    return;
+                    break;
                 }
                 Destroy(gameObject);
                 break;
@@ -90,6 +90,9 @@ public class Interaction : MonoBehaviour
                 if (!transform.GetChild(1).GetComponent<CheckInteraction>().IsInArea()) return;
                 player.transform.position = transform.GetChild(0).transform.position;
                 GetComponent<FogWall>().boss.GetComponent<BossStateMachine>().Active = true;
+                text.transform.parent.gameObject.SetActive(false);
+                text.text = null;
+                this.enabled = false;
                 break;
             case Type.beacon:
                 player.GetComponent<PlayerStateMachine>().SwitchState(new PlayerRespawnState(player.GetComponent<PlayerStateMachine>()));
@@ -97,6 +100,9 @@ public class Interaction : MonoBehaviour
                 break;
             case Type.chest:
                 if (TryGetComponent<ChestLoot>(out ChestLoot chestLoot)) chestLoot.OpenChest();
+                text.transform.parent.gameObject.SetActive(false);
+                text.text = null;
+                Destroy(this);
                 break;
         }
     }
