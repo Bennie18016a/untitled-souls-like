@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossStateMachine : StateMachine
+public class BossStateMachine : StateMachine, IDataPersistence
 {
     #region Scripts
     [field: Header("Scripts")]
@@ -83,10 +83,38 @@ public class BossStateMachine : StateMachine
     private void HandleDie()
     {
         GetComponent<Drops>().Died();
-        GameObject.Destroy(gameObject);
+        gameObject.SetActive(false);
+        dead = true;
     }
     #endregion
 
+    #region SaveLoad
+    [SerializeField] private string id;
+    public bool dead;
+
+    [ContextMenu("Generate GUID for Enemies")]
+    private void GenerateID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.bosses.TryGetValue(id, out dead);
+        gameObject.SetActive(!dead);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.bosses.ContainsKey(id))
+        {
+            data.bosses.Remove(id);
+        }
+
+        data.bosses.Add(id, dead);
+    }
+
+    #endregion
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

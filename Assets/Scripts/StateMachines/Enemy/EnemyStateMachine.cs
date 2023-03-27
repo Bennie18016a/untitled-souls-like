@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyStateMachine : StateMachine
+public class EnemyStateMachine : StateMachine, IDataPersistence
 {
     #region Scripts
     [field: SerializeField] public Animator Animator { get; private set; }
@@ -26,6 +26,15 @@ public class EnemyStateMachine : StateMachine
     public GameObject Player { get; private set; }
     public Vector3 startPos { get; private set; }
     #endregion
+
+    [SerializeField] private string id;
+    public bool dead;
+
+    [ContextMenu("Generate GUID for Enemies")]
+    private void GenerateID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
 
     #region Unity Functions
     private void Awake()
@@ -63,6 +72,7 @@ public class EnemyStateMachine : StateMachine
     private void HandleDie()
     {
         gameObject.SetActive(false);
+        dead = true;
     }
     #endregion
 
@@ -76,5 +86,21 @@ public class EnemyStateMachine : StateMachine
 
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, StrafeRange);
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.enemies.TryGetValue(id, out dead);
+        gameObject.SetActive(!dead);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.enemies.ContainsKey(id))
+        {
+            data.enemies.Remove(id);
+        }
+
+        data.enemies.Add(id, dead);
     }
 }

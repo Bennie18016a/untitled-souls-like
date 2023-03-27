@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateMachine : StateMachine
+public class PlayerStateMachine : StateMachine, IDataPersistence
 {
     #region Scripts
     [field: SerializeField] public ForceReciver ForceReciver { get; private set; }
@@ -40,7 +40,11 @@ public class PlayerStateMachine : StateMachine
 
     private void Start()
     {
-        SwitchState(new PlayerRespawnState(this));
+        //SwitchState(new PlayerRespawnState(this));
+        Health.SetMaxHealth(95 + Stats.Health * 5);
+        Stamina.SetMaxStamina(40 + Stats.Dexterity * 10); ;
+
+        SwitchState(new PlayerFreeLookState(this));
     }
 
     private void OnEnable()
@@ -62,5 +66,15 @@ public class PlayerStateMachine : StateMachine
     private void HandleDie()
     {
         SwitchState(new PlayerRespawnState(this));
+    }
+
+    public void LoadData(GameData data)
+    {
+        transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = transform.position;
     }
 }

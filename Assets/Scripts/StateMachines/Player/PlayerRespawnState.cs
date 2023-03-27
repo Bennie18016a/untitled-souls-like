@@ -22,6 +22,7 @@ public class PlayerRespawnState : PlayerBaseState
         foreach (Transform entity in entities.GetComponentInChildren<Transform>())
         {
             entity.position = entity.GetComponent<EnemyStateMachine>().startPos;
+            entity.GetComponent<EnemyStateMachine>().dead = false;
             entity.GetComponent<Health>().AddHealth(10000000);
             entity.gameObject.SetActive(true);
         }

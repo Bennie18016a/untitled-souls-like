@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UseQuickItem : MonoBehaviour
+public class UseQuickItem : MonoBehaviour, IDataPersistence
 {
     public InputReader ir;
     public TMP_Text itemText;
@@ -121,5 +121,30 @@ public class UseQuickItem : MonoBehaviour
     private void OnDisable()
     {
         ir.SwitchQuickItemEvent -= SwapItem;
+    }
+
+    public void LoadData(GameData data)
+    {
+        int nectar, stamina;
+        QuickItem _nectar = QuickItems.Find(t => t.ID == 0);
+        QuickItem _stamina = QuickItems.Find(t => t.ID == 1);
+
+        data.QuickItems.TryGetValue(_nectar.ID.ToString(), out nectar);
+        data.QuickItems.TryGetValue(_stamina.ID.ToString(), out stamina);
+
+        _nectar.Number = nectar;
+        _stamina.Number = stamina;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        QuickItem _nectar = QuickItems.Find(t => t.ID == 0);
+        QuickItem _stamina = QuickItems.Find(t => t.ID == 1);
+
+        if (data.QuickItems.ContainsKey(_nectar.ID.ToString())) data.QuickItems.Remove(_nectar.ID.ToString());
+        if (data.QuickItems.ContainsKey(_stamina.ID.ToString())) data.QuickItems.Remove(_stamina.ID.ToString());
+
+        data.QuickItems.Add(_nectar.ID.ToString(), _nectar.Number);
+        data.QuickItems.Add(_stamina.ID.ToString(), _stamina.Number);
     }
 }

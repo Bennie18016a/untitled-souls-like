@@ -8,7 +8,10 @@ public class FogWall : MonoBehaviour
 
     private void Update()
     {
-        if (boss == null) { Destroy(gameObject); }
+        if (boss.GetComponent<BossStateMachine>().dead)
+        {
+            Destroy(gameObject);
+        }
     }
 
 }

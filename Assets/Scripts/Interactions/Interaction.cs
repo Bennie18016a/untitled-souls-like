@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class Interaction : MonoBehaviour
+public class Interaction : MonoBehaviour, IDataPersistence
 {
     public enum Type { door, keydoor, onesidedoor, fogwall, beacon, chest }
     public Type _type;
@@ -68,7 +68,10 @@ public class Interaction : MonoBehaviour
         switch (_type)
         {
             case Type.door:
-                Destroy(gameObject);
+                text.transform.parent.gameObject.SetActive(false);
+                text.text = null;
+                activated = true;
+                gameObject.SetActive(false);
                 break;
             case Type.keydoor:
                 if (!GetComponent<CheckInteraction>().HasKey(transform.name))
@@ -76,7 +79,10 @@ public class Interaction : MonoBehaviour
                     textMenu.OpenMenu("Key required");
                     return;
                 }
-                Destroy(gameObject);
+                text.transform.parent.gameObject.SetActive(false);
+                text.text = null;
+                activated = true;
+                gameObject.SetActive(false);
                 break;
             case Type.onesidedoor:
                 if (!GetComponentInChildren<CheckInteraction>().IsInArea())
@@ -84,7 +90,10 @@ public class Interaction : MonoBehaviour
                     textMenu.OpenMenu("This door is opened elsewhere");
                     break;
                 }
-                Destroy(gameObject);
+                text.transform.parent.gameObject.SetActive(false);
+                text.text = null;
+                activated = true;
+                gameObject.SetActive(false);
                 break;
             case Type.fogwall:
                 if (!transform.GetChild(1).GetComponent<CheckInteraction>().IsInArea()) return;
@@ -102,7 +111,8 @@ public class Interaction : MonoBehaviour
                 if (TryGetComponent<ChestLoot>(out ChestLoot chestLoot)) chestLoot.OpenChest();
                 text.transform.parent.gameObject.SetActive(false);
                 text.text = null;
-                Destroy(this);
+                activated = true;
+                this.enabled = false;
                 break;
         }
     }
@@ -117,5 +127,43 @@ public class Interaction : MonoBehaviour
         ir.InteractAction -= Interact;
         text.transform.parent.gameObject.SetActive(false);
         text.text = null;
+    }
+
+    [SerializeField] private string id;
+    public bool activated;
+
+    [ContextMenu("Generate GUID for Enemies")]
+    private void GenerateID()
+    {
+        id = System.Guid.NewGuid().ToString();
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.interactions.TryGetValue(id, out activated);
+
+        if (!activated) return;
+
+        switch (_type)
+        {
+            default:
+                gameObject.SetActive(false);
+                break;
+            case Type.fogwall:
+                return;
+            case Type.beacon:
+                return;
+            case Type.chest:
+                GetComponent<Animator>().SetTrigger("Open");
+                this.enabled = false;
+                break;
+        }
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        if (data.interactions.ContainsKey(id)) data.interactions.Remove(id);
+
+        data.interactions.Add(id, activated);
     }
 }
