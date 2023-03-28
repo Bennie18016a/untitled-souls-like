@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Utilities;
+using UnityEngine.EventSystems;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIActions
 {
@@ -16,10 +16,16 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
     public bool IsBlocking { get; private set; }
     #endregion
 
+    #region UI Menus
+    public GameObject Tabs;
+    public GameObject PauseMenu;
+    #endregion
+
     #region Private Values
     private Controls _controls;
     private bool Targeting;
     private bool inUI;
+    private bool TabsActive;
     #endregion
 
     #region Player Events
@@ -42,6 +48,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
 
         _controls = new Controls();
         _controls.Player.SetCallbacks(this);
+        _controls.UI.SetCallbacks(this);
 
         _controls.Player.Enable();
     }
@@ -142,6 +149,16 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
     {
         IsHeavyAttacking = context.performed;
     }
+
+    public void OnPauseMenu(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+
+        TabsActive = true;
+        Tabs.SetActive(TabsActive);
+        GoToUI();
+        EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
+    }
     #endregion
 
     #region UI
@@ -157,7 +174,20 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
 
     public void OnBack(InputAction.CallbackContext context)
     {
+        if (!context.performed) { return; }
 
+        if (PauseMenu.activeInHierarchy)
+        {
+            PauseMenu.SetActive(false);
+            Tabs.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
+        }
+        else if (TabsActive)
+        {
+            TabsActive = false;
+            Tabs.SetActive(TabsActive);
+            GoToUI();
+        }
     }
     #endregion
 }
