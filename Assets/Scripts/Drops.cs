@@ -18,7 +18,7 @@ public class Drops : MonoBehaviour
 
             if (item.itemType == Item.ItemType.key)
             {
-                player.GetComponent<KeyInventory>().AddKey(item.name);
+                player.GetComponent<KeyInventory>().AddKey(item.name, item);
             }
         }
 

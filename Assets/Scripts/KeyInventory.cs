@@ -7,17 +7,27 @@ using UnityEngine;
 public class KeyInventory : MonoBehaviour, IDataPersistence
 {
     public List<string> keys = new List<string>();
+    public List<Item> itemKeys = new List<Item>();
+    public Inventory inv;
 
-    public void AddKey(string newKey)
+    public void AddKey(string newKey, Item itemKey)
     {
         keys.Add(newKey);
+        itemKeys.Add(itemKey);
+        inv.AddItem(itemKey);
     }
 
     public bool CheckKey(string key)
     {
         foreach (string _key in keys)
         {
-            if (_key == key) { keys.Remove(_key); return true; }
+            if (_key == key)
+            {
+                keys.Remove(_key);
+                inv.RemoveItem(itemKeys.Find(Item => Item.name == _key));
+                itemKeys.RemoveAll(Item => Item.name == _key);
+                return true;
+            }
         }
         return false;
     }

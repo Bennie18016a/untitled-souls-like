@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChestLoot : MonoBehaviour
 {
-    public List<string> keys = new List<string>();
+    public List<Item> Items = new List<Item>();
     public List<QuickItem> quickItems = new List<QuickItem>();
     public ItemMenu itemMenu;
 
@@ -12,9 +12,12 @@ public class ChestLoot : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        foreach (string key in keys)
+        foreach (Item item in Items)
         {
-            player.GetComponent<KeyInventory>().AddKey(key);
+            if (item.itemType == Item.ItemType.key)
+            {
+                player.GetComponent<KeyInventory>().AddKey(item.name, item);
+            }
         }
 
         foreach (QuickItem quickItem in quickItems)

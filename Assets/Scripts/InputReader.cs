@@ -19,6 +19,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
     #region UI Menus
     public GameObject Tabs;
     public GameObject PauseMenu;
+    public GameObject InvMenu;
     #endregion
 
     #region Private Values
@@ -179,6 +180,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
         if (PauseMenu.activeInHierarchy)
         {
             PauseMenu.SetActive(false);
+            Tabs.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
+        }
+        else if (InvMenu.activeInHierarchy)
+        {
+            InvMenu.SetActive(false);
             Tabs.SetActive(true);
             EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
         }
