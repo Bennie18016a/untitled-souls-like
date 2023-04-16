@@ -1113,7 +1113,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2.91
-  m_Radius: 0.71
+  m_Radius: 1.05
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.04
@@ -1209,6 +1209,9 @@ MonoBehaviour:
   <AttackDamage>k__BackingField: 40
   <Knockback>k__BackingField: 3
   <MaxAttackAttemptTime>k__BackingField: 5
+  _type: 0
+  id: 
+  dead: 0
 --- !u!1 &5637029400578699184
 GameObject:
   m_ObjectHideFlags: 0

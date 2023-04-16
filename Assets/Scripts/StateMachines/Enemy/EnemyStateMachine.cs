@@ -27,8 +27,10 @@ public class EnemyStateMachine : StateMachine, IDataPersistence
     public Vector3 startPos { get; private set; }
     #endregion
 
+    public enum Type { goblin, moof }
+    public Type _type;
     [SerializeField] private string id;
-    public bool dead;
+    [HideInInspector] public bool dead;
 
     [ContextMenu("Generate GUID for Enemies")]
     private void GenerateID()

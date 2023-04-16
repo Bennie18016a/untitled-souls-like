@@ -18,6 +18,8 @@ public class BossChaseState : BossBaseState
     {
         if (!_stateMachine.Active) { return; }
 
+        _stateMachine.AttackCooldown += 1 * deltaTime;
+        Debug.Log(_stateMachine.AttackCooldown);
         int random = Random.Range(0, 4);
         if (random == 0)
         {
@@ -25,6 +27,10 @@ public class BossChaseState : BossBaseState
             {
                 case BossStateMachine.Boss.Goblin_King:
                     _stateMachine.SwitchState(new KingAttackingState(_stateMachine));
+                    break;
+                case BossStateMachine.Boss.Fallen_Witch:
+                    if (_stateMachine.AttackCooldown < _stateMachine.AttackCooldownMax) break;
+                    _stateMachine.SwitchState(new WitchAttackingState(_stateMachine));
                     break;
             }
         }

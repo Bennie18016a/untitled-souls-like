@@ -26,19 +26,24 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     [field: SerializeField] public float MaxWaitToGrabTime { get; private set; }
+    [field: SerializeField] public float AttackCooldownMax { get; private set; }
     [field: SerializeField] public bool Active { get; set; }
+    public enum Boss { Goblin_King, Fallen_Witch }
+    [field: SerializeField] public Boss thisBoss;
     #region Distances
     [field: Header("Distances")]
     [field: SerializeField] public float StrafeDistance { get; private set; }
     [field: SerializeField] public float PunchDistance { get; private set; }
     [field: SerializeField] public float KickDistance { get; private set; }
     [field: SerializeField] public float ThrowDistance { get; private set; }
+    [field: SerializeField] public float TreadDistance { get; private set; }
+    [field: SerializeField] public float KnifeDistance { get; private set; }
+    [field: SerializeField] public float LifeDistance { get; private set; }
+    [field: SerializeField] public float MaxDistanceFromPlayer { get; private set; }
     #endregion
-
-    public enum Boss { Goblin_King }
-    public Boss thisBoss;
-    public GameObject Player { get; private set; }
-    public Vector3 startPos { get; private set; }
+    [field: HideInInspector] public GameObject Player { get; private set; }
+    [field: HideInInspector] public Vector3 startPos { get; private set; }
+    [field: HideInInspector] public float AttackCooldown;
     #endregion
 
     #region Unity Functions
@@ -54,10 +59,18 @@ public class BossStateMachine : StateMachine, IDataPersistence
         NavMeshAgent.updatePosition = false;
         NavMeshAgent.updateRotation = false;
 
-        LeftFistWeaponDamage.SetDamage(15, 5);
-        RightFistWeaponDamage.SetDamage(15, 5);
-        KickWeaponDamage.SetDamage(30, 15);
-        GrabWeaponDamage.SetDamage(40, 0);
+        switch (thisBoss)
+        {
+            case Boss.Goblin_King:
+                LeftFistWeaponDamage.SetDamage(15, 5);
+                RightFistWeaponDamage.SetDamage(15, 5);
+                KickWeaponDamage.SetDamage(30, 15);
+                GrabWeaponDamage.SetDamage(40, 0);
+                break;
+
+            case Boss.Fallen_Witch:
+                break;
+        }
 
         SwitchState(new BossChaseState(this));
     }
@@ -78,11 +91,14 @@ public class BossStateMachine : StateMachine, IDataPersistence
     #region Events
     private void HandleTakeDamage()
     {
-        //SwitchState(new EnemyImpactState(this));
+        ForceReciver.AddForce(-Vector3.forward * 10);
     }
     private void HandleDie()
     {
-        GetComponent<Drops>().Died();
+        if (TryGetComponent<Drops>(out Drops drops))
+        {
+            drops.Died();
+        }
         gameObject.SetActive(false);
         dead = true;
     }
@@ -128,5 +144,17 @@ public class BossStateMachine : StateMachine, IDataPersistence
 
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, ThrowDistance);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, TreadDistance);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, KnifeDistance);
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, LifeDistance);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, MaxDistanceFromPlayer);
     }
 }

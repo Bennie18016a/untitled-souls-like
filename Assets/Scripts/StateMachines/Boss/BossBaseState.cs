@@ -51,6 +51,7 @@ public abstract class BossBaseState : State
     }
 
     #region Distance Checks
+    // Goblin King
     protected bool IsInStafeRange()
     {
         float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
@@ -77,6 +78,27 @@ public abstract class BossBaseState : State
         float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
 
         return playerDistanceSqr <= _stateMachine.ThrowDistance * _stateMachine.ThrowDistance;
+    }
+
+    protected bool IsInTreadRange()
+    {
+        float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= _stateMachine.TreadDistance * _stateMachine.TreadDistance;
+    }
+    //Witch
+    protected bool IsInKnifeRange()
+    {
+        float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= _stateMachine.KnifeDistance * _stateMachine.KnifeDistance;
+    }
+
+    protected bool IsInLifeRange()
+    {
+        float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
+
+        return playerDistanceSqr <= _stateMachine.LifeDistance * _stateMachine.LifeDistance;
     }
     #endregion
 }

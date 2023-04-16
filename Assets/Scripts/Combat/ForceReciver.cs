@@ -11,6 +11,7 @@ public class ForceReciver : MonoBehaviour
     private float verticalVelocity;
     private Vector3 _impact;
     private Vector3 _dampingVelocity;
+    public bool useGravity = true;
 
     public Vector3 movement => _impact + Vector3.up * verticalVelocity;
 
@@ -21,7 +22,7 @@ public class ForceReciver : MonoBehaviour
         {
             verticalVelocity = Physics.gravity.y * Time.deltaTime;
         }
-        else
+        else if (useGravity && !cc.isGrounded)
         {
             verticalVelocity += Physics.gravity.y * Time.deltaTime;
         }

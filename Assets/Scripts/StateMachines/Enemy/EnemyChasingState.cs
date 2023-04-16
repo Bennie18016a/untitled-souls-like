@@ -24,7 +24,12 @@ public class EnemyChasingState : EnemyBaseState
         }
         else if (IsInStafeRange())
         {
+            if (_stateMachine._type == EnemyStateMachine.Type.moof) return;
             _stateMachine.SwitchState(new EnemyStrafeState(_stateMachine));
+        }
+        else if (IsInAttackRange())
+        {
+            _stateMachine.SwitchState(new EnemyAttackingState(_stateMachine));
         }
         MoveToPlayer(deltaTime);
         FacePlayer();
