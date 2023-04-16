@@ -8,6 +8,9 @@ public class BossChaseState : BossBaseState
     private readonly int SpeedHash = Animator.StringToHash("Speed");
     private const float AnimatorDampTime = 0.1f;
 
+    private Vector3 randomDirection;
+    private bool isWalkingRandomly;
+
     public BossChaseState(BossStateMachine stateMachine) : base(stateMachine) { }
     public override void Enter()
     {
@@ -19,7 +22,7 @@ public class BossChaseState : BossBaseState
         if (!_stateMachine.Active) { return; }
 
         _stateMachine.AttackCooldown += 1 * deltaTime;
-        Debug.Log(_stateMachine.AttackCooldown);
+
         int random = Random.Range(0, 4);
         if (random == 0)
         {
@@ -35,7 +38,52 @@ public class BossChaseState : BossBaseState
             }
         }
 
-        MoveToPlayer(deltaTime);
+        if (_stateMachine.MinDistanceFromPlayer != 0 || _stateMachine.MaxDistanceFromPlayer != 0)
+        {
+            float Distance = Vector3.Distance(_stateMachine.transform.position, _stateMachine.Player.transform.position);
+
+            if (Distance < _stateMachine.MinDistanceFromPlayer)
+            {
+                Vector3 moveDirection = _stateMachine.transform.position - _stateMachine.Player.transform.position;
+                moveDirection.y = 0;
+                moveDirection = moveDirection.normalized * _stateMachine.MovementSpeed * deltaTime;
+                _stateMachine.CharacterController.Move(moveDirection);
+
+                if (Distance > _stateMachine.MaxDistanceFromPlayer)
+                {
+                    Vector3 clampPosition = _stateMachine.Player.transform.position - moveDirection.normalized * _stateMachine.MaxDistanceFromPlayer;
+                    _stateMachine.CharacterController.Move(clampPosition - _stateMachine.transform.position);
+                }
+
+                isWalkingRandomly = false;
+            }
+            else if (Distance > _stateMachine.MaxDistanceFromPlayer)
+            {
+                Vector3 moveDirection = _stateMachine.Player.transform.position - _stateMachine.transform.position;
+                moveDirection.y = 0; // ensure the enemy doesn't move up or down
+                moveDirection = moveDirection.normalized * _stateMachine.MovementSpeed * Time.deltaTime;
+                _stateMachine.CharacterController.Move(moveDirection);
+
+                isWalkingRandomly = false;
+            }
+            else
+            {
+                if (!isWalkingRandomly)
+                {
+                    randomDirection = Random.insideUnitCircle.normalized * _stateMachine.MovementSpeed;
+                    randomDirection.y = -7.532f;
+                    isWalkingRandomly = true;
+                }
+
+                Vector3 moveDirection = _stateMachine.transform.position + randomDirection * deltaTime;
+                _stateMachine.CharacterController.Move(moveDirection - _stateMachine.transform.position);
+            }
+        }
+        else
+        {
+            MoveToPlayer(deltaTime);
+        }
+
         FacePlayer();
 
         _stateMachine.Animator.SetFloat(SpeedHash, 1f, AnimatorDampTime, deltaTime);

@@ -14333,7 +14333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494161908193, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.017162438
+      value: 0.017162442
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494161908193, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.y
@@ -14341,7 +14341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494161908193, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000017695127
+      value: 0.000000021420417
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494193658498, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_ChildCameras.Array.size
@@ -14377,11 +14377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494486054072, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1e-45
+      value: 3e-45
       objectReference: {fileID: 0}
     - target: {fileID: 5650813494486054072, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 5650813495155877406, guid: 896e3546f6134194c9ceea8d4172cc9c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17227,6 +17227,7 @@ MonoBehaviour:
   <KnifeDistance>k__BackingField: 0
   <LifeDistance>k__BackingField: 0
   <MaxDistanceFromPlayer>k__BackingField: 0
+  <MinDistanceFromPlayer>k__BackingField: 0
   AttackCooldown: 0
   id: e1ff2af7-7541-480d-ae83-cd67fb36d29e
   dead: 0
@@ -27544,10 +27545,11 @@ MonoBehaviour:
   <PunchDistance>k__BackingField: 0
   <KickDistance>k__BackingField: 0
   <ThrowDistance>k__BackingField: 0
-  <TreadDistance>k__BackingField: 12.5
+  <TreadDistance>k__BackingField: 10
   <KnifeDistance>k__BackingField: 5
   <LifeDistance>k__BackingField: 8
-  <MaxDistanceFromPlayer>k__BackingField: 0
+  <MaxDistanceFromPlayer>k__BackingField: 12
+  <MinDistanceFromPlayer>k__BackingField: 4.5
   AttackCooldown: 0
   id: c6cc79e4-e2d5-40ee-aa9c-d222bff785e3
   dead: 0

@@ -42,7 +42,7 @@ public class WitchTreadAttackState : BossBaseState
     void ShootRaycasts()
     {
         float radius = 5f; // set the radius of the sphere
-        int numRaycasts = 4; // set the number of raycasts to shoot
+        int numRaycasts = 10; // set the number of raycasts to shoot
         float raycastLength = 100f; // set the length of the raycasts
 
         for (int i = 0; i < numRaycasts; i++)

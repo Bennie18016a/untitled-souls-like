@@ -47,8 +47,15 @@ public class ForceReciver : MonoBehaviour
 
     public void Throw(Vector3 direction, float force)
     {
-        _impact += direction * 150;
-        verticalVelocity += force;
+        if (direction == Vector3.up)
+        {
+            _impact += direction * force;
+        }
+        else
+        {
+            _impact += direction * 150;
+            verticalVelocity += force;
+        }
 
     }
 }
