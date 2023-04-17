@@ -8,6 +8,8 @@ public class WitchKnifeAttackState : BossBaseState
     private float _previousFrameTime;
     bool hasnotshot;
     GameObject kunais;
+    float time;
+    int num;
 
     public WitchKnifeAttackState(BossStateMachine stateMachine) : base(stateMachine) { }
 
@@ -41,14 +43,31 @@ public class WitchKnifeAttackState : BossBaseState
 
         if (normalizedTime >= _previousFrameTime && normalizedTime > .5f && !hasnotshot)
         {
-            foreach (KunaiBehaviour kunai in kunais.GetComponentsInChildren<KunaiBehaviour>())
+            if (time > 0 && num == 0)
             {
-                kunai.Shoot();
+                kunais.transform.GetComponentInChildren<KunaiBehaviour>().Shoot();
+                num++;
             }
+            if (time > .5f && num == 1)
+            {
+                kunais.transform.GetComponentInChildren<KunaiBehaviour>().Shoot();
+                num++;
+            }
+            if (time > .7f && num == 2)
+            {
+                kunais.transform.GetComponentInChildren<KunaiBehaviour>().Shoot();
+                num++;
+            }
+            Debug.Log(num);
+
+            time += 1 * deltaTime;
         }
 
         _previousFrameTime = normalizedTime;
 
     }
-    public override void Exit() { }
+    public override void Exit()
+    {
+        GameObject.Destroy(kunais);
+    }
 }

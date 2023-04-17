@@ -25,12 +25,19 @@ public class KunaiBehaviour : MonoBehaviour
             targetPos.y = transform.position.y;
 
             transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
+            float distance = Vector3.Distance(transform.position, targetPos);
+            if (distance < .05)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     [ContextMenu("Shoot")]
     public void Shoot()
     {
+        target = GameObject.Find("Player").GetComponent<Transform>().position;
         flying = true;
     }
 
@@ -39,6 +46,7 @@ public class KunaiBehaviour : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         other.transform.GetComponent<Health>().DealDamage(damage, false);
+        other.transform.GetComponent<ForceReciver>().AddForce((other.transform.position - transform.position).normalized * 20);
         Destroy(gameObject);
     }
 }
