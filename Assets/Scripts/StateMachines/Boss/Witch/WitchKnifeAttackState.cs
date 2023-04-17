@@ -6,12 +6,22 @@ using UnityEngine;
 public class WitchKnifeAttackState : BossBaseState
 {
     private float _previousFrameTime;
+    bool hasnotshot;
+    GameObject kunais;
 
     public WitchKnifeAttackState(BossStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
         _stateMachine.Animator.CrossFadeInFixedTime("Targeting Knives", 0.1f);
+        kunais = new GameObject();
+
+        for (int i = 0; i != 3; i++)
+        {
+            Vector3 pos = GameObject.Find("KunaiSpawn").transform.position;
+            GameObject kunai = (GameObject)GameObject.Instantiate(Resources.Load("Kunai"), pos, Quaternion.identity);
+            kunai.transform.parent = kunais.transform;
+        }
     }
 
     public override void Tick(float deltaTime)
@@ -28,6 +38,15 @@ public class WitchKnifeAttackState : BossBaseState
         {
             _stateMachine.SwitchState(new BossChaseState(_stateMachine));
         }
+
+        if (normalizedTime >= _previousFrameTime && normalizedTime > .5f && !hasnotshot)
+        {
+            foreach (KunaiBehaviour kunai in kunais.GetComponentsInChildren<KunaiBehaviour>())
+            {
+                kunai.Shoot();
+            }
+        }
+
         _previousFrameTime = normalizedTime;
 
     }
