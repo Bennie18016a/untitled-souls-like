@@ -12,7 +12,6 @@ public class LifeStealTrap : MonoBehaviour
     public bool m_IsTrapped = true;
     private float m_CurrentSpammingProgress = 0f;
     private float m_SpammingBarDecreaseRate = 0.2f;
-    private int m_SpamTarget = 10;
     private float m_HealthDecreaseInterval = 2f;
     private float m_HealthDecreaseTimer = 0f;
 
