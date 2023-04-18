@@ -27,6 +27,7 @@ public class PlayerBlockState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (!_stateMachine.CanMove) { return; }
         #region Switch States
         if (_stateMachine.InputReader.IsAttacking)
         {

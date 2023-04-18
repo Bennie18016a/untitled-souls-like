@@ -22,6 +22,7 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public CharacterController CharacterController { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
     [field: SerializeField] public PreThrowHandler PreThrowHandler { get; private set; }
+    [field: SerializeField] public GameObject LifeStealSpawn { get; private set; }
     [field: SerializeField] public float LookSpeed { get; private set; }
     [field: SerializeField] public float MovementSpeed { get; private set; }
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }

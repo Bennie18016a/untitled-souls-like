@@ -20,6 +20,8 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        if (!_stateMachine.CanMove) { return; }
+
         #region Switch States
         if (_stateMachine.InputReader.IsAttacking && _stateMachine.Stamina.CanAction(_stateMachine.Attacks[0].StaminaCost))
         {

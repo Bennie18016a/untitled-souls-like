@@ -6,6 +6,7 @@ using UnityEngine;
 public class WitchLifeAttackState : BossBaseState
 {
     private float _previousFrameTime;
+    bool hasnotshot;
 
     public WitchLifeAttackState(BossStateMachine stateMachine) : base(stateMachine) { }
 
@@ -27,6 +28,13 @@ public class WitchLifeAttackState : BossBaseState
         else
         {
             _stateMachine.SwitchState(new BossChaseState(_stateMachine));
+        }
+
+        if (normalizedTime >= _previousFrameTime && normalizedTime > .25f && !hasnotshot)
+        {
+            GameObject.Instantiate(Resources.Load("LifeSteal"), _stateMachine.LifeStealSpawn.transform.position, Quaternion.identity);
+            Debug.Log("Here");
+            hasnotshot = true;
         }
         _previousFrameTime = normalizedTime;
 
