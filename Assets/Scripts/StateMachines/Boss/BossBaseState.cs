@@ -80,13 +80,14 @@ public abstract class BossBaseState : State
         return playerDistanceSqr <= _stateMachine.ThrowDistance * _stateMachine.ThrowDistance;
     }
 
+    //Witch
+
     protected bool IsInTreadRange()
     {
         float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;
 
         return playerDistanceSqr <= _stateMachine.TreadDistance * _stateMachine.TreadDistance;
     }
-    //Witch
     protected bool IsInKnifeRange()
     {
         float playerDistanceSqr = (_stateMachine.Player.transform.position - _stateMachine.transform.position).sqrMagnitude;

@@ -41,6 +41,9 @@ public class BossChaseState : BossBaseState
         if (_stateMachine.MinDistanceFromPlayer != 0 || _stateMachine.MaxDistanceFromPlayer != 0)
         {
             float Distance = Vector3.Distance(_stateMachine.transform.position, _stateMachine.Player.transform.position);
+            GameObject wall = GameObject.Find("Cliffs");
+
+            bool tooCloseToWall = Vector3.Distance(wall.transform.position, _stateMachine.transform.position) > _stateMachine.MaxDistanceToWall;
 
             if (Distance < _stateMachine.MinDistanceFromPlayer)
             {
@@ -57,7 +60,7 @@ public class BossChaseState : BossBaseState
 
                 isWalkingRandomly = false;
             }
-            else if (Distance > _stateMachine.MaxDistanceFromPlayer)
+            else if (Distance > _stateMachine.MaxDistanceFromPlayer && !tooCloseToWall)
             {
                 Vector3 moveDirection = _stateMachine.Player.transform.position - _stateMachine.transform.position;
                 moveDirection.y = 0; // ensure the enemy doesn't move up or down

@@ -42,6 +42,7 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public float LifeDistance { get; private set; }
     [field: SerializeField] public float MaxDistanceFromPlayer { get; private set; }
     [field: SerializeField] public float MinDistanceFromPlayer { get; private set; }
+    [field: SerializeField] public float MaxDistanceToWall { get; private set; }
     #endregion
     [field: HideInInspector] public GameObject Player { get; private set; }
     [field: HideInInspector] public Vector3 startPos { get; private set; }
@@ -161,5 +162,8 @@ public class BossStateMachine : StateMachine, IDataPersistence
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, MinDistanceFromPlayer);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, MaxDistanceToWall);
     }
 }

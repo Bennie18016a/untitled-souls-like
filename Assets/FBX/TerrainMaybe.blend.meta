@@ -32,8 +32,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Cliff Colours
+    second: {fileID: 2100000, guid: d2f6926768567d640a22a85a4bd2afd0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cliff Colours.001
+    second: {fileID: 2100000, guid: dce0c2c571e46fb4aac4f87565ffb7b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Grass
     second: {fileID: 2100000, guid: 90b69939383a2a248a4d7aedc7df54a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass.001
+    second: {fileID: 2100000, guid: 10164f91780d045408f06d3cffac6e04, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
