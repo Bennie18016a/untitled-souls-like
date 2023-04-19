@@ -73,5 +73,15 @@ public class Health : MonoBehaviour
     {
         HealthSlider.GetComponent<Slider>().value = _health;
     }
+
+    public int GetHealth()
+    {
+        return _health;
+    }
+
+    public int GetMaxHealth()
+    {
+        return MaximumHealth;
+    }
     #endregion
 }

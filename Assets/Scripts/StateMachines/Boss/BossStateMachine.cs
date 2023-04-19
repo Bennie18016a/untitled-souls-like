@@ -28,6 +28,7 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     [field: SerializeField] public float MaxWaitToGrabTime { get; private set; }
     [field: SerializeField] public float AttackCooldownMax { get; private set; }
+    [field: SerializeField] public int Phase { get; set; }
     [field: SerializeField] public bool Active { get; set; }
     public enum Boss { Goblin_King, Fallen_Witch }
     [field: SerializeField] public Boss thisBoss;

@@ -60,12 +60,9 @@ public class BossChaseState : BossBaseState
 
                 isWalkingRandomly = false;
             }
-            else if (Distance > _stateMachine.MaxDistanceFromPlayer && !tooCloseToWall)
+            else if (Distance > _stateMachine.MaxDistanceFromPlayer)
             {
-                Vector3 moveDirection = _stateMachine.Player.transform.position - _stateMachine.transform.position;
-                moveDirection.y = 0; // ensure the enemy doesn't move up or down
-                moveDirection = moveDirection.normalized * _stateMachine.MovementSpeed * Time.deltaTime;
-                _stateMachine.CharacterController.Move(moveDirection);
+                MoveToPlayer(deltaTime);
 
                 isWalkingRandomly = false;
             }

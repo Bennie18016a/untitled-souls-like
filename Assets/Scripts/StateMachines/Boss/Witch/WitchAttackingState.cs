@@ -10,17 +10,24 @@ public class WitchAttackingState : BossBaseState
 
     public override void Enter()
     {
+        if (_stateMachine.Health.GetHealth() < (_stateMachine.Health.GetMaxHealth() * 0.75))
+        {
+            _stateMachine.Phase = 2;
+        }
+
         int RandomAttack = Random.Range(0, 3) + 1;
 
         switch (RandomAttack)
         {
             case 1:
+                if (_stateMachine.Phase != 2) _stateMachine.SwitchState(new WitchAttackingState(_stateMachine));
                 Attack = "Tread";
                 break;
             case 2:
                 Attack = "Knife";
                 break;
             case 3:
+                if (_stateMachine.Phase != 2) _stateMachine.SwitchState(new WitchAttackingState(_stateMachine));
                 Attack = "Life";
                 break;
         }
