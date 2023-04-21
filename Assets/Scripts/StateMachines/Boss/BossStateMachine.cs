@@ -28,6 +28,7 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public float MaxAttackAttemptTime { get; private set; }
     [field: SerializeField] public float MaxWaitToGrabTime { get; private set; }
     [field: SerializeField] public float AttackCooldownMax { get; private set; }
+    [field: SerializeField] public float ShockCooldownMax { get; private set; }
     [field: SerializeField] public int Phase { get; set; }
     [field: SerializeField] public bool Active { get; set; }
     public enum Boss { Goblin_King, Fallen_Witch }
@@ -41,6 +42,7 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public float TreadDistance { get; private set; }
     [field: SerializeField] public float KnifeDistance { get; private set; }
     [field: SerializeField] public float LifeDistance { get; private set; }
+    [field: SerializeField] public float ShockDistance { get; private set; }
     [field: SerializeField] public float MaxDistanceFromPlayer { get; private set; }
     [field: SerializeField] public float MinDistanceFromPlayer { get; private set; }
     [field: SerializeField] public float MaxDistanceToWall { get; private set; }
@@ -48,6 +50,7 @@ public class BossStateMachine : StateMachine, IDataPersistence
     [field: HideInInspector] public GameObject Player { get; private set; }
     [field: HideInInspector] public Vector3 startPos { get; private set; }
     [field: HideInInspector] public float AttackCooldown;
+    [field: HideInInspector] public float ShockCooldown;
     #endregion
 
     #region Unity Functions
@@ -157,6 +160,9 @@ public class BossStateMachine : StateMachine, IDataPersistence
 
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, LifeDistance);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, ShockDistance);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, MaxDistanceFromPlayer);

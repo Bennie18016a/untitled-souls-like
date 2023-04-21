@@ -15,7 +15,7 @@ public class WitchAttackingState : BossBaseState
             _stateMachine.Phase = 2;
         }
 
-        int RandomAttack = Random.Range(0, 3) + 1;
+        int RandomAttack = Random.Range(0, 4) + 1;
 
         switch (RandomAttack)
         {
@@ -29,6 +29,9 @@ public class WitchAttackingState : BossBaseState
             case 3:
                 if (_stateMachine.Phase != 2) _stateMachine.SwitchState(new WitchAttackingState(_stateMachine));
                 Attack = "Life";
+                break;
+            case 4:
+                Attack = "Shock";
                 break;
         }
 
@@ -53,6 +56,10 @@ public class WitchAttackingState : BossBaseState
             case "Life":
                 if (!IsInfront() || !IsInLifeRange()) break;
                 _stateMachine.SwitchState(new WitchLifeAttackState(_stateMachine));
+                break;
+            case "Shock":
+                if (_stateMachine.ShockCooldown < _stateMachine.ShockCooldownMax) { _stateMachine.SwitchState(new WitchAttackingState(_stateMachine)); break; }
+                _stateMachine.SwitchState(new WitchShockAttackState(_stateMachine));
                 break;
         }
 

@@ -10,6 +10,8 @@ public class PlayerBlockState : PlayerBaseState
     private readonly int TargetFoward = Animator.StringToHash("TargetForward");
     private readonly int TargetRight = Animator.StringToHash("TargetRight");
     private const float AnimatorDampTime = 0.1f;
+    private string StartcurrentState;
+    private string currentState;
 
 
     public PlayerBlockState(PlayerStateMachine stateMachine) : base(stateMachine) { }
@@ -21,8 +23,18 @@ public class PlayerBlockState : PlayerBaseState
         _stateMachine.InputReader.QuickItemEvent += OnQuickItem;
         _stateMachine.InputReader.DodgeEvent += OnDodge;
 
-        if (_stateMachine.Targeter.currentTarget == null) { _stateMachine.Animator.CrossFadeInFixedTime(FreeBlockBlendTree, 0.1f); }
-        else { _stateMachine.Animator.CrossFadeInFixedTime(TargetBlockBlendTree, 0.1f); }
+        if (_stateMachine.Targeter.currentTarget == null)
+        {
+            _stateMachine.Animator.CrossFadeInFixedTime(FreeBlockBlendTree, 0.1f);
+            StartcurrentState = "Freelook";
+            currentState = "Freelook";
+        }
+        else
+        {
+            _stateMachine.Animator.CrossFadeInFixedTime(TargetBlockBlendTree, 0.1f);
+            StartcurrentState = "Target";
+            currentState = "Target";
+        }
     }
 
     public override void Tick(float deltaTime)
@@ -46,9 +58,27 @@ public class PlayerBlockState : PlayerBaseState
         }
         #endregion
 
-        #region Movement
         if (_stateMachine.Targeter.currentTarget == null)
         {
+            currentState = "Freelook";
+        }
+        else
+        {
+            currentState = "Target";
+        }
+
+        Debug.Log(currentState);
+        Debug.Log(StartcurrentState);
+
+        #region Movement
+        if (currentState == "Freelook")
+        {
+            if (StartcurrentState != currentState)
+            {
+                _stateMachine.Animator.CrossFadeInFixedTime(FreeBlockBlendTree, 0.1f);
+                StartcurrentState = "Freelook";
+                currentState = "Freelook";
+            }
             Vector3 movement = CalculateMovementFree();
             Move(movement * _stateMachine.BlockMovementSpeed, deltaTime);
 
@@ -64,6 +94,12 @@ public class PlayerBlockState : PlayerBaseState
         }
         else
         {
+            if (StartcurrentState != currentState)
+            {
+                _stateMachine.Animator.CrossFadeInFixedTime(TargetBlockBlendTree, 0.1f);
+                StartcurrentState = "Target";
+                currentState = "Target";
+            }
             Vector3 movement = CalculateMovementTarget();
             Move(movement * _stateMachine.BlockMovementSpeed, deltaTime);
 

@@ -43,10 +43,10 @@ public class LifeStealTrap : MonoBehaviour
             {
                 // Resets the timer
                 m_HealthDecreaseTimer = 0f;
-                // Decrease player health by 15
-                GameObject.Find("Player").GetComponent<Health>().DealDamage(15, true);
-                // Add the witches health by 15
-                GameObject.Find("Witch").GetComponent<Health>().AddHealth(15);
+                // Decrease player health by 25
+                GameObject.Find("Player").GetComponent<Health>().DealDamage(25, true);
+                // Add the witches health by 25
+                GameObject.Find("Witch").GetComponent<Health>().AddHealth(25);
             }
         }
         else

@@ -22,6 +22,7 @@ public class BossChaseState : BossBaseState
         if (!_stateMachine.Active) { return; }
 
         _stateMachine.AttackCooldown += 1 * deltaTime;
+        _stateMachine.ShockCooldown += 1 * deltaTime;
 
         int random = Random.Range(0, 4);
         if (random == 0)

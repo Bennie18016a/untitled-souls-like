@@ -33,7 +33,6 @@ public class WitchLifeAttackState : BossBaseState
         if (normalizedTime >= _previousFrameTime && normalizedTime > .25f && !hasnotshot)
         {
             GameObject.Instantiate(Resources.Load("LifeSteal"), _stateMachine.LifeStealSpawn.transform.position, Quaternion.identity);
-            Debug.Log("Here");
             hasnotshot = true;
         }
         _previousFrameTime = normalizedTime;

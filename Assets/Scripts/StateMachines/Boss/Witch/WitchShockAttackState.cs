@@ -33,10 +33,18 @@ public class WitchShockAttackState : BossBaseState
         if (normalizedTime >= _previousFrameTime && normalizedTime > .25f && !hasnotshot)
         {
             // Shoot the shockwave
+            Collider[] colldiers = Physics.OverlapSphere(_stateMachine.transform.position, _stateMachine.ShockDistance);
+
+            foreach (Collider collider in colldiers)
+            {
+                Debug.Log(collider.transform.name);
+                if (!collider.CompareTag("Player")) continue;
+                collider.transform.GetComponent<ForceReciver>().AddForce((collider.transform.position - _stateMachine.transform.position).normalized * 25);
+            }
             hasnotshot = true;
         }
         _previousFrameTime = normalizedTime;
 
     }
-    public override void Exit() { }
+    public override void Exit() { _stateMachine.ShockCooldown = 0; }
 }
