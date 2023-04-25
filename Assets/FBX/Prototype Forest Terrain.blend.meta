@@ -7,13 +7,118 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Bark
+    second: {fileID: 2100000, guid: e72596ed9b535034fb88e4c6c0b64fbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark.001
+    second: {fileID: 2100000, guid: 09564ab245b68064ab9a3b6851effb86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark.002
+    second: {fileID: 2100000, guid: 97752fbee2d2e7349b7e331e3a11aecf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark.003
+    second: {fileID: 2100000, guid: 9bf7cc7aec3edd74c923397f47582870, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark.004
+    second: {fileID: 2100000, guid: c7bac6228163bd14b961a923c015052c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Grass
     second: {fileID: 2100000, guid: a3e7f6e58e20e394883586bc2ec14ab5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Log
+    second: {fileID: 2100000, guid: 2348cc5ce6c51a34aab367c3631a0edb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Log.001
+    second: {fileID: 2100000, guid: 856f300adcc31504db1ab0981a0cb8da, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Log.002
+    second: {fileID: 2100000, guid: 603a3527a583577409bbf0a3a6dca870, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Log.003
+    second: {fileID: 2100000, guid: cd2e2ed0cb4bb6146b488df81e556c83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Log.004
+    second: {fileID: 2100000, guid: ffff86a8e716bbc4680ffd51bc232fd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: f327f75d742561240be7ba394e3c4694, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.001
     second: {fileID: 2100000, guid: 17e6deda4ace15c4a97536f376a28fee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks
+    second: {fileID: 2100000, guid: 3368f35431689ab4e8349aadeb4e921c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.001
+    second: {fileID: 2100000, guid: a1547d6312cd8f34d930f43100c99a2d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.002
+    second: {fileID: 2100000, guid: 45bec17fb41b03940812aa60422d3ed8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.003
+    second: {fileID: 2100000, guid: 030e63fb0f9732c4cbab3b5cb6f0ac53, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.004
+    second: {fileID: 2100000, guid: d16686fcc22e99342a540829c4842f8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.005
+    second: {fileID: 2100000, guid: 8bec73fb42f7de644822278d9387b83b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.006
+    second: {fileID: 2100000, guid: f267894ec01feb340876925061422806, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.007
+    second: {fileID: 2100000, guid: 5cea99ea159abca4d8bf922d1c858aec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.008
+    second: {fileID: 2100000, guid: 2fbb7d09b6e36df46bf4defe84505521, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks.009
+    second: {fileID: 2100000, guid: b0693ae15b6197a45a84cc41eacabe10, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

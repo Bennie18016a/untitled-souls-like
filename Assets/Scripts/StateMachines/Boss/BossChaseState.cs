@@ -44,8 +44,6 @@ public class BossChaseState : BossBaseState
             float Distance = Vector3.Distance(_stateMachine.transform.position, _stateMachine.Player.transform.position);
             GameObject wall = GameObject.Find("Cliffs");
 
-            bool tooCloseToWall = Vector3.Distance(wall.transform.position, _stateMachine.transform.position) > _stateMachine.MaxDistanceToWall;
-
             if (Distance < _stateMachine.MinDistanceFromPlayer)
             {
                 Vector3 moveDirection = _stateMachine.transform.position - _stateMachine.Player.transform.position;

@@ -17,14 +17,19 @@ public class PlayerRespawnState : PlayerBaseState
         _stateMachine.UseQuickItem.ResetQuickItems();
         _stateMachine.transform.position = _stateMachine.respawnPoint;
 
-        GameObject entities = GameObject.Find("--Entities--");
+        GameObject areas = GameObject.Find("--Entities--");
 
-        foreach (Transform entity in entities.GetComponentInChildren<Transform>())
+        foreach (Transform area in areas.GetComponentInChildren<Transform>())
         {
-            entity.position = entity.GetComponent<EnemyStateMachine>().startPos;
-            entity.GetComponent<EnemyStateMachine>().dead = false;
-            entity.GetComponent<Health>().AddHealth(10000000);
-            entity.gameObject.SetActive(true);
+            EnemyStateMachine[] entities = area.GetComponentsInChildren<EnemyStateMachine>(true);
+
+            foreach (EnemyStateMachine entity in entities)
+            {
+                entity.transform.position = entity.GetComponent<EnemyStateMachine>().startPos;
+                entity.dead = false;
+                entity.Health.AddHealth(10000000);
+                entity.gameObject.SetActive(true);
+            }
         }
 
         GameObject bosses = GameObject.Find("--Bosses--");
@@ -45,8 +50,6 @@ public class PlayerRespawnState : PlayerBaseState
                 interaction.enabled = true;
             }
         }
-
-
         _stateMachine.SwitchState(new PlayerFreeLookState(_stateMachine));
     }
 
