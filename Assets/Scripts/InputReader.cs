@@ -36,6 +36,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
     public event Action QuickItemEvent;
     public event Action SwitchQuickItemEvent;
     public event Action InteractAction;
+    public event Action LevelUpAction;
     #endregion
 
     #region UI Events
@@ -195,6 +196,18 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
             Tabs.SetActive(TabsActive);
             GoToUI();
         }
+        else if (GameObject.Find("Beacon Menu").transform.GetChild(1).gameObject.activeInHierarchy)
+        {
+            GameObject.Find("Beacon Menu").transform.GetChild(1).gameObject.SetActive(false);
+            GameObject.Find("Beacon Menu").transform.GetChild(0).gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("Beacon Menu").transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
+        }
+    }
+
+    public void OnLevelUp(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        LevelUpAction?.Invoke();
     }
     #endregion
 }

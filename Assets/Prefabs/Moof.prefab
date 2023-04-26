@@ -963,6 +963,7 @@ GameObject:
   - component: {fileID: 4919254285276738245}
   - component: {fileID: 4919254285276738250}
   - component: {fileID: 4919254285276738249}
+  - component: {fileID: 5039906469629752698}
   m_Layer: 0
   m_Name: Moof
   m_TagString: Untagged
@@ -1046,6 +1047,7 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 4919254285276738244}
   <NavMeshAgent>k__BackingField: {fileID: 4919254285276738250}
   <WeaponDamage>k__BackingField: {fileID: 4919254286309080412}
+  <Drops>k__BackingField: {fileID: 5039906469629752698}
   <Target>k__BackingField: {fileID: 4919254285276738249}
   <MovementSpeed>k__BackingField: 2
   <PlayerDetectionRange>k__BackingField: 5
@@ -1134,6 +1136,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d715aeb8f1ff6846a2e6fb9c547e105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5039906469629752698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5225823067505282963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19452a52997842478c304504feb675a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemMenu: {fileID: 0}
+  items: []
+  currency: 150
 --- !u!1 &5422812415841545416
 GameObject:
   m_ObjectHideFlags: 0

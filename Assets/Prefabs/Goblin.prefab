@@ -1041,6 +1041,7 @@ GameObject:
   - component: {fileID: 543450653133813027}
   - component: {fileID: 543450653133813028}
   - component: {fileID: 543450653133813029}
+  - component: {fileID: 7615458193300356626}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -1156,6 +1157,7 @@ MonoBehaviour:
   cc: {fileID: 543450653133813024}
   agent: {fileID: 543450653133813025}
   drag: 0.3
+  useGravity: 1
 --- !u!114 &543450653133813027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,6 +1203,7 @@ MonoBehaviour:
   <Health>k__BackingField: {fileID: 543450653133813027}
   <NavMeshAgent>k__BackingField: {fileID: 543450653133813025}
   <WeaponDamage>k__BackingField: {fileID: 31612763}
+  <Drops>k__BackingField: {fileID: 7615458193300356626}
   <Target>k__BackingField: {fileID: 4701688480864947891}
   <MovementSpeed>k__BackingField: 3
   <PlayerDetectionRange>k__BackingField: 7
@@ -1212,6 +1215,21 @@ MonoBehaviour:
   _type: 0
   id: 
   dead: 0
+--- !u!114 &7615458193300356626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620115284033326315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a19452a52997842478c304504feb675a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemMenu: {fileID: 0}
+  items: []
+  currency: 500
 --- !u!1 &5637029400578699184
 GameObject:
   m_ObjectHideFlags: 0

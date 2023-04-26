@@ -12,6 +12,7 @@ public class EnemyStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public Health Health { get; private set; }
     [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
     [field: SerializeField] public WeaponDamage WeaponDamage { get; private set; }
+    [field: SerializeField] public Drops Drops { get; private set; }
     #endregion
 
     #region Variables
@@ -74,6 +75,7 @@ public class EnemyStateMachine : StateMachine, IDataPersistence
     private void HandleDie()
     {
         gameObject.SetActive(false);
+        Drops.Died();
         dead = true;
     }
     #endregion

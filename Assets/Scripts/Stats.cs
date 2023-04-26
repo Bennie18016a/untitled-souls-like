@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [Serializable]
 public class Stats : MonoBehaviour, IDataPersistence
@@ -10,6 +11,17 @@ public class Stats : MonoBehaviour, IDataPersistence
     [field: SerializeField] public int Strength;
     [field: SerializeField] public int Dexterity;
     [field: SerializeField] public int Knowledge;
+
+    public TMP_Text health, magic, strength, dexterity, knowledge;
+
+    private void Update()
+    {
+        health.text = Health.ToString();
+        magic.text = Magic.ToString();
+        strength.text = Strength.ToString();
+        dexterity.text = Dexterity.ToString();
+        knowledge.text = Knowledge.ToString();
+    }
 
     public void LoadData(GameData data)
     {

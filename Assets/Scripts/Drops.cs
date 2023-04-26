@@ -12,6 +12,7 @@ public class Drops : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
+        //Give the player any items
         foreach (Item item in items)
         {
             itemMenu.AddToList(item);
@@ -22,7 +23,10 @@ public class Drops : MonoBehaviour
             }
         }
 
-        itemMenu.gameObject.SetActive(true);
-        //add currency to player
+        if (items.Count > 0)
+            itemMenu.gameObject.SetActive(true);
+
+        //Add currency to player
+        player.GetComponent<KeyInventory>().AddCurrency(currency);
     }
 }

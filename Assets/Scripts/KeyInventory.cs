@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class KeyInventory : MonoBehaviour, IDataPersistence
@@ -9,12 +10,51 @@ public class KeyInventory : MonoBehaviour, IDataPersistence
     public List<string> keys = new List<string>();
     public List<Item> itemKeys = new List<Item>();
     public Inventory inv;
+    public int currency;
+    public TMP_Text currencyText;
+    public TMP_Text levelUptext;
+    private int uiCurrency;
+    public bool hasSpent;
+    [HideInInspector] public int level = 1;
+    public List<int> levelCosts = new List<int>();
+    [HideInInspector] public int nextLevelUpCost;
+
+    private void Update()
+    {
+        nextLevelUpCost = levelCosts[level - 1];
+        if (currency > uiCurrency)
+        {
+            uiCurrency += 10;
+            if (currency < uiCurrency + 1000)
+            {
+                uiCurrency += 40;
+            }
+        }
+
+        if (hasSpent && uiCurrency > currency)
+        {
+            uiCurrency -= 10;
+            if (currency + 1000 < uiCurrency)
+            {
+                uiCurrency -= 40;
+            }
+
+            if (currency == uiCurrency) hasSpent = false;
+        }
+        currencyText.text = uiCurrency.ToString();
+        levelUptext.text = nextLevelUpCost.ToString();
+    }
 
     public void AddKey(string newKey, Item itemKey)
     {
         keys.Add(newKey);
         itemKeys.Add(itemKey);
         inv.AddItem(itemKey);
+    }
+
+    public void AddCurrency(int toAdd)
+    {
+        currency += toAdd;
     }
 
     public bool CheckKey(string key)

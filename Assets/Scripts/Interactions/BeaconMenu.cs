@@ -24,7 +24,7 @@ public class BeaconMenu : MonoBehaviour, IDataPersistence
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>().respawnPoint = transform.position;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>()
         .SwitchState(new PlayerRespawnState(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>()));
-        GameObject _active = beaconMenu.transform.GetChild(1).GetChild(0).gameObject;
+        GameObject _active = beaconMenu.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
         EventSystem.current.SetSelectedGameObject(_active);
         ir.GoToUI();
 
