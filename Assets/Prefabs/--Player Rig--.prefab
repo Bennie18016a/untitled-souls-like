@@ -699,7 +699,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level Up (Coming Soon)
+  m_text: Level Up
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5961,6 +5961,9 @@ MonoBehaviour:
   currency: 0
   currencyText: {fileID: 1618501377}
   levelUptext: {fileID: 8026152225967795445}
+  hasSpent: 0
+  level: 1
+  levelCosts: 
   nextLevelUpCost: 0
 --- !u!114 &1842807720037360793
 MonoBehaviour:
@@ -6694,7 +6697,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5650813494161908194}
-  m_LocalRotation: {x: -0.01814146, y: 0.000000029802322, z: -0.000000013038516, w: 0.9998355}
+  m_LocalRotation: {x: -0.01814145, y: -0, z: -0.0000000037252903, w: 0.99983543}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7115,7 +7118,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5650813495155877407}
-  m_LocalRotation: {x: 0.018189503, y: -0.00000005960465, z: 0.0000000018626454, w: 0.9998346}
+  m_LocalRotation: {x: 0.018189495, y: -0.00000005960465, z: -0.000000005587936, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

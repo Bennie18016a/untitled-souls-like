@@ -20,6 +20,13 @@ public class BeaconMenu : MonoBehaviour, IDataPersistence
 
     public void OpenMenu()
     {
+        /*When opening the menu:
+        Sets the menu to be visible,
+        Sets the player repsawn point to the menu,
+        Changes the player to be in the "Respawn" state,
+        Makes the currently selected button to be "Exit Beacon" in the beacon menu,
+        Switches the inputreader to read "UI" input only*/
+
         beaconMenu.SetActive(true);
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>().respawnPoint = transform.position;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStateMachine>()
@@ -27,6 +34,8 @@ public class BeaconMenu : MonoBehaviour, IDataPersistence
         GameObject _active = beaconMenu.transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
         EventSystem.current.SetSelectedGameObject(_active);
         ir.GoToUI();
+
+        //Sets all of the other beacons active to false and makes this beacon be active
 
         GameObject beacons = GameObject.Find("--Beacons--");
 
@@ -38,6 +47,8 @@ public class BeaconMenu : MonoBehaviour, IDataPersistence
         }
         active = true;
     }
+
+    //Saving and Loading
 
     public void LoadData(GameData data)
     {
