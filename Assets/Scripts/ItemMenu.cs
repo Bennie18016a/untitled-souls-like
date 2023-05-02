@@ -79,7 +79,7 @@ public class ItemMenu : MonoBehaviour
         int id = newItem.ID;
         string text = CheckSmiliarQuickItems(newItem);
         active = true;
-        transform.GetChild(3).GetComponent<Image>().sprite = newItem.Icon;
+        transform.GetChild(2).GetComponent<Image>().sprite = newItem.Icon;
         transform.GetChild(1).GetComponent<TMP_Text>().text = text;
         newQuickItems.RemoveAll(QuickItem => QuickItem.ID == id);
     }
