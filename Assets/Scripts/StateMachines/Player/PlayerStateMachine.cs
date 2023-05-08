@@ -16,6 +16,7 @@ public class PlayerStateMachine : StateMachine, IDataPersistence
     [field: SerializeField] public Stamina Stamina { get; private set; }
     [field: SerializeField] public Stats Stats { get; private set; }
     [field: SerializeField] public UseQuickItem UseQuickItem { get; private set; }
+    [field: SerializeField] public GearInventory GearInventory { get; private set; }
     #endregion
 
     #region Variables

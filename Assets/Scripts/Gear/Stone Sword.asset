@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b630440912c83ba48b4d1b66cf537b9d, type: 3}
-  m_Name: Starter Sword
+  m_Name: Stone Sword
   m_EditorClassIdentifier: 
-  GearName: Prisoner Sword
+  GearName: Slightly Better Sword
   Icon: {fileID: 21300000, guid: 9326a55ebf647ff43b3bec3330a3f302, type: 3}
   gearType: 0
-  damage: 10
-  heavyDamage: 15
+  damage: 100
+  heavyDamage: 19
   weaponType: 0
   health: 0
   stamina: 0

@@ -9,12 +9,23 @@ public class TabButtons : MonoBehaviour
     public void ActivateUI(GameObject UI)
     {
         UI.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(UI.transform.GetChild(1).gameObject);
-        if (UI.transform.name == "Inventory")
+
+        switch (UI.transform.name)
         {
-            GameObject toSelect = UI.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).gameObject;
-            EventSystem.current.SetSelectedGameObject(toSelect);
+            case "Item Inventory":
+                EventSystem.current.SetSelectedGameObject(UI.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).gameObject);
+                break;
+            case "Pause":
+                EventSystem.current.SetSelectedGameObject(UI.transform.GetChild(1).gameObject);
+                break;
+            case "Gear Inventory":
+                EventSystem.current.SetSelectedGameObject(UI.transform.GetChild(0).GetChild(0).GetChild(0).gameObject);
+                break;
+            default:
+                Debug.Log("Error finding: " + UI.transform.name);
+                break;
         }
+
         tabsMenu.SetActive(false);
     }
 

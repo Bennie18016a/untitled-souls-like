@@ -13,6 +13,7 @@ public class Gear : ScriptableObject
 
     [Header("Weapon")]
     public int damage;
+    public int heavyDamage;
     public enum WeaponType { swordNshield }
     public WeaponType weaponType;
 

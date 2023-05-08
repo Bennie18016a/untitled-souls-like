@@ -20,6 +20,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
     public GameObject Tabs;
     public GameObject PauseMenu;
     public GameObject InvMenu;
+    public GameObject GearInv;
+    public GameObject BeaconMenu;
     #endregion
 
     #region Private Values
@@ -178,29 +180,36 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions, Controls.IUIA
     {
         if (!context.performed) { return; }
 
+        if (Tabs.activeInHierarchy)
+        {
+            TabsActive = false;
+            Tabs.SetActive(TabsActive);
+            GoToUI();
+        }
+
         if (PauseMenu.activeInHierarchy)
         {
             PauseMenu.SetActive(false);
             Tabs.SetActive(true);
             EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
         }
-        else if (InvMenu.activeInHierarchy)
+        if (InvMenu.activeInHierarchy)
         {
             InvMenu.SetActive(false);
             Tabs.SetActive(true);
             EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
         }
-        else if (TabsActive)
+        if (BeaconMenu.transform.GetChild(1).gameObject.activeInHierarchy)
         {
-            TabsActive = false;
-            Tabs.SetActive(TabsActive);
-            GoToUI();
+            BeaconMenu.transform.GetChild(1).gameObject.SetActive(false);
+            BeaconMenu.transform.GetChild(0).gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(BeaconMenu.transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
         }
-        else if (GameObject.Find("Beacon Menu").transform.GetChild(1).gameObject.activeInHierarchy)
+        if (GearInv.activeInHierarchy)
         {
-            GameObject.Find("Beacon Menu").transform.GetChild(1).gameObject.SetActive(false);
-            GameObject.Find("Beacon Menu").transform.GetChild(0).gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(GameObject.Find("Beacon Menu").transform.GetChild(0).GetChild(1).GetChild(0).gameObject);
+            GearInv.SetActive(false);
+            Tabs.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(Tabs.transform.GetChild(1).gameObject);
         }
     }
 

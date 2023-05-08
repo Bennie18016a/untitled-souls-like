@@ -16,7 +16,12 @@ public class PlayerAttackingState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.Stamina.SetNaturalStamina(false);
-        _stateMachine.WeaponDamage.SetDamage(_attack.AttackDamage + (_stateMachine.Stats.Strength * 2), _attack.Knockback);
+        int damage = _stateMachine.GearInventory.GetDamage(false);
+        damage += _stateMachine.Stats.Strength * 2;
+        if (_attack.CombatStateIndex == 2) damage += 5;
+        else if (_attack.CombatStateIndex == -1) damage += 10;
+
+        _stateMachine.WeaponDamage.SetDamage(damage, _attack.Knockback);
         _stateMachine.Stamina.TakeStamina(_attack.StaminaCost);
         _stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
     }

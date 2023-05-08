@@ -16,7 +16,7 @@ public class PlayerHeavyAttackingState : PlayerBaseState
     public override void Enter()
     {
         _stateMachine.Stamina.SetNaturalStamina(false);
-        _stateMachine.WeaponDamage.SetDamage(_attack.AttackDamage + _stateMachine.Stats.Strength, _attack.Knockback);
+        _stateMachine.WeaponDamage.SetDamage(_stateMachine.GearInventory.GetDamage(true) + _stateMachine.Stats.Strength, _attack.Knockback);
         _stateMachine.Stamina.TakeStamina(_attack.StaminaCost);
         _stateMachine.Animator.CrossFadeInFixedTime(_attack.AnimationName, _attack.TransitionDuration);
     }

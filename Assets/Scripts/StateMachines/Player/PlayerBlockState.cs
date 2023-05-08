@@ -67,9 +67,6 @@ public class PlayerBlockState : PlayerBaseState
             currentState = "Target";
         }
 
-        Debug.Log(currentState);
-        Debug.Log(StartcurrentState);
-
         #region Movement
         if (currentState == "Freelook")
         {
