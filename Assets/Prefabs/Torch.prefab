@@ -4857,16 +4857,16 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8490566, g: 0.5250305, b: 0.22027414, a: 1}
-  m_Intensity: 2.5
+  m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -4969,13 +4969,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8889594240991507177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 760107a571c3480448c08197d78916ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minIntensity: 1.5
-  maxIntensity: 3
+  minIntensity: 4
+  maxIntensity: 5
   Timer: 0.1
 --- !u!1001 &8889594240486471073
 PrefabInstance:
