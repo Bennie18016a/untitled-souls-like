@@ -9,6 +9,7 @@ public class TabButtons : MonoBehaviour
     public void ActivateUI(GameObject UI)
     {
         UI.SetActive(true);
+        tabsMenu.SetActive(false);
 
         switch (UI.transform.name)
         {
@@ -25,8 +26,6 @@ public class TabButtons : MonoBehaviour
                 Debug.Log("Error finding: " + UI.transform.name);
                 break;
         }
-
-        tabsMenu.SetActive(false);
     }
 
     public void QuitGame()

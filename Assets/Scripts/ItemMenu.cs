@@ -52,9 +52,21 @@ public class ItemMenu : MonoBehaviour
     {
         newItems.Add(newItem);
     }
+    public void AddToList(Gear newGear)
+    {
+        NewGear(newGear);
+    }
     public void AddToList(QuickItem newQuickItem)
     {
         newQuickItems.Add(newQuickItem);
+    }
+
+    public void NewGear(Gear newGear)
+    {
+        if (active) return;
+        active = true;
+        transform.GetChild(2).GetComponent<Image>().sprite = newGear.Icon;
+        transform.GetChild(1).GetComponent<TMP_Text>().text = newGear.GearName;
     }
 
     public void NewItem(Item newItem)
@@ -62,7 +74,7 @@ public class ItemMenu : MonoBehaviour
         if (active) return;
         curItem = newItem;
         active = true;
-        transform.GetChild(3).GetComponent<Image>().sprite = newItem.Icon;
+        transform.GetChild(2).GetComponent<Image>().sprite = newItem.Icon;
         transform.GetChild(1).GetComponent<TMP_Text>().text = newItem.ItemName;
 
         switch (newItem.itemType)

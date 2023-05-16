@@ -6,6 +6,7 @@ public class ChestLoot : MonoBehaviour
 {
     public List<Item> Items = new List<Item>();
     public List<QuickItem> quickItems = new List<QuickItem>();
+    public List<Gear> gears = new List<Gear>();
     public ItemMenu itemMenu;
 
     public void OpenChest()
@@ -33,6 +34,12 @@ public class ChestLoot : MonoBehaviour
         {
             player.GetComponent<UseQuickItem>().QuickItems[quickItem.ID].Number++;
             itemMenu.AddToList(quickItem);
+        }
+
+        foreach (Gear gear in gears)
+        {
+            player.GetComponent<GearInventory>().gear.Add(gear);
+            itemMenu.AddToList(gear);
         }
 
         GetComponent<Animator>().SetTrigger("Open");

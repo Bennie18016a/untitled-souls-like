@@ -9,6 +9,7 @@ public class Stamina : MonoBehaviour
     public GameObject StaminaSlider;
     public float NaturalStaminaMaxTime;
     [SerializeField] private int maxStamina;
+    [SerializeField] private int gearMaxStamina;
     private int _stamina;
     private float naturalStaminaTime;
     private bool canNaturalStamina;
@@ -17,16 +18,28 @@ public class Stamina : MonoBehaviour
     #region Unity Functions
     private void Start()
     {
-        _stamina = maxStamina;
+        NewEquipment();
+        _stamina = gearMaxStamina;
         canNaturalStamina = true;
     }
 
     private void Update()
     {
-        StaminaSlider.GetComponent<Slider>().maxValue = maxStamina;
+        StaminaSlider.GetComponent<Slider>().maxValue = gearMaxStamina;
         NaturalStamina();
         if (StaminaSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
         naturalStaminaTime += 1 * Time.deltaTime;
+    }
+
+    public void NewEquipment()
+    {
+        GearInventory gi = GetComponent<GearInventory>();
+        gearMaxStamina = maxStamina;
+
+        foreach (Gear gear in gi.equippedGear)
+        {
+            gearMaxStamina += gear.stamina;
+        }
     }
     #endregion
 
@@ -38,7 +51,7 @@ public class Stamina : MonoBehaviour
 
     public void AddStamina(int stamina)
     {
-        _stamina = Mathf.Min(_stamina + stamina, maxStamina);
+        _stamina = Mathf.Min(_stamina + stamina, gearMaxStamina);
     }
 
     public void SetMaxStamina(int newMaxStamina)
@@ -60,7 +73,7 @@ public class Stamina : MonoBehaviour
     private void NaturalStamina()
     {
         if (!canNaturalStamina) { return; }
-        if (_stamina >= maxStamina) { _stamina = maxStamina; return; }
+        if (_stamina >= gearMaxStamina) { _stamina = gearMaxStamina; return; }
         if (naturalStaminaTime < NaturalStaminaMaxTime) { return; }
 
         _stamina = Mathf.Max(_stamina + 1, 0);

@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
 
     #region Private Fields
     [SerializeField] private int MaximumHealth = 100;
+    [SerializeField] private int gearMaxHealth;
     private int _health;
     private bool _isDead => _health == 0;
     private bool isInvunerable;
@@ -25,16 +26,28 @@ public class Health : MonoBehaviour
     #region Unity Functions
     private void Start()
     {
-        _health = MaximumHealth;
-
+        NewEquipment();
+        _health = gearMaxHealth;
         if (gameObject.name == "Player") return;
         HealthSlider.SetActive(false);
     }
 
     private void Update()
     {
-        HealthSlider.GetComponent<Slider>().maxValue = MaximumHealth;
+        HealthSlider.GetComponent<Slider>().maxValue = gearMaxHealth;
         if (HealthSlider.gameObject.activeInHierarchy) { UpdateSlider(); }
+    }
+
+    public void NewEquipment()
+    {
+        TryGetComponent<GearInventory>(out GearInventory gi);
+        gearMaxHealth = MaximumHealth;
+        if (gi == null) return;
+
+        foreach (Gear gear in gi.equippedGear)
+        {
+            gearMaxHealth += gear.health;
+        }
     }
     #endregion
 
@@ -66,7 +79,7 @@ public class Health : MonoBehaviour
 
     public void AddHealth(int health)
     {
-        _health = Mathf.Min(_health + health, MaximumHealth);
+        _health = Mathf.Min(_health + health, gearMaxHealth);
     }
 
     private void UpdateSlider()

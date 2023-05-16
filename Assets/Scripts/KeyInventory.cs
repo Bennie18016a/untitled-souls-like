@@ -25,7 +25,7 @@ public class KeyInventory : MonoBehaviour, IDataPersistence
         if (currency > uiCurrency)
         {
             uiCurrency += 10;
-            if (currency < uiCurrency + 1000)
+            if (currency > uiCurrency + 1000)
             {
                 uiCurrency += 40;
             }

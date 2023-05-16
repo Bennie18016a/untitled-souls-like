@@ -107,6 +107,11 @@ public class GearInventory : MonoBehaviour
             equippedGear.Remove(currentlyEquipped);
             equippedGear.Add(newgear);
             UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_default);
+            if (currentlyEquipped.gearType != Gear.GearType.weapon)
+            {
+                GetComponent<Health>().NewEquipment();
+                GetComponent<Stamina>().NewEquipment();
+            }
             Swap(newgear.gearType);
         }
     }
